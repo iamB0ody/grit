@@ -1,0 +1,234 @@
+/* GRIT Marketing Solutions - Custom Styles */
+/* Futuristic landing page with glass header, animated orbs, and glow effects */
+
+/* ========================================
+   Glass Header
+   ======================================== */
+.glass-header {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari */
+  border-bottom: 1px solid rgba(161, 205, 64, 0.1);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass-header {
+    background: rgba(10, 10, 10, 0.95);
+  }
+}
+
+/* ========================================
+   Animated Gradient Orbs
+   ======================================== */
+.gradient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradient-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(161, 205, 64, 0.15) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.gradient-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(161, 205, 64, 0.1) 0%, transparent 70%);
+  bottom: -100px;
+  left: -50px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(50px, -30px) scale(1.05);
+  }
+  50% {
+    transform: translate(-30px, 50px) scale(0.95);
+  }
+  75% {
+    transform: translate(-50px, -20px) scale(1.02);
+  }
+}
+
+/* ========================================
+   Scroll Reveal
+   ======================================== */
+.reveal-section {
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* ========================================
+   Hover Glow Effects
+   ======================================== */
+.glow-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glow-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 30px rgba(161, 205, 64, 0.2),
+    0 0 60px rgba(161, 205, 64, 0.1);
+}
+
+/* ========================================
+   Button Styles
+   ======================================== */
+.btn-outline {
+  border: 2px solid #a1cd40;
+  color: #a1cd40;
+  background: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background: #a1cd40;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(161, 205, 64, 0.4);
+}
+
+.btn-solid {
+  background: #a1cd40;
+  color: #0a0a0a;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(161, 205, 64, 0.5);
+}
+
+/* ========================================
+   Focus Styles (Accessibility)
+   ======================================== */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #a1cd40;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Active Navigation Link
+   ======================================== */
+nav a.active {
+  color: #a1cd40;
+  border-bottom: 2px solid #a1cd40;
+}
+
+/* ========================================
+   Custom Bullet Lists
+   ======================================== */
+.custom-bullet {
+  list-style: none;
+  padding-left: 0;
+}
+
+.custom-bullet li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.custom-bullet li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #a1cd40;
+  border-radius: 50%;
+}
+
+/* ========================================
+   Section Transitions
+   ======================================== */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   Hamburger Menu Icon
+   ======================================== */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 1.5rem;
+  height: 2px;
+  background: #a1cd40;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========================================
+   Reduced Motion Preferences
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-orb {
+    animation: none;
+  }
+
+  .reveal-section {
+    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   Smooth Scrolling
+   ======================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,17 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#151515"/>
+  <text x="400" y="260" font-family="Arial, sans-serif" font-size="24" fill="#a1cd40" text-anchor="middle" font-weight="bold">
+    TODO: Replace with unDraw illustration
+  </text>
+  <text x="400" y="300" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle">
+    File: process.svg
+  </text>
+  <text x="400" y="330" font-family="Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle">
+    Keywords: workflow, steps, process
+  </text>
+  <text x="400" y="360" font-family="Arial, sans-serif" font-size="14" fill="#666666" text-anchor="middle">
+    Visit undraw.co/illustrations and search with keywords above
+  </text>
+  <circle cx="400" cy="450" r="80" fill="none" stroke="#a1cd40" stroke-width="3"/>
+  <path d="M 400 420 L 400 480 M 370 450 L 430 450" stroke="#a1cd40" stroke-width="3" stroke-linecap="round"/>
+</svg>

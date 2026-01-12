@@ -2,8 +2,14 @@
 
 **Feature Branch**: `001-rebuild-landing-page`
 **Created**: 2026-01-12
+**Updated**: 2026-01-13
 **Status**: Draft
-**Input**: Rebuild the GRIT Marketing Solutions landing page correctly - using real HTML text (not full-slide images) with only cropped illustration assets from the PDF slides.
+**Input**: Rebuild the GRIT landing page from scratch with a modern, elegant, futuristic design using unDraw illustrations (SVG, recolored to #a1cd40), dark futuristic base colors, and premium micro-interactions while keeping GRIT branding and verbatim PDF content.
+
+## Clarifications
+
+### Session 2026-01-13
+- Q: Which sections should appear in the header navigation? → A: Main content sections only (exclude Hero and Thank You footer)
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -17,9 +23,10 @@ A visitor lands on the GRIT Marketing Solutions website and wants to learn about
 
 **Acceptance Scenarios**:
 
-1. **Given** a visitor loads the landing page, **When** the page finishes loading, **Then** they see a hero section with the GRIT logo and brand visual elements on a dark background (#0b0b0b/#111)
+1. **Given** a visitor loads the landing page, **When** the page finishes loading, **Then** they see a hero section with the GRIT logo, animated gradient orb background, and brand visual elements on a dark futuristic background (#0b0f14 / #0a0a0a)
 2. **Given** a visitor is viewing any section, **When** they try to select text, **Then** all headings and paragraphs are selectable real HTML text (not images)
-3. **Given** a visitor scrolls through the page, **When** each section enters the viewport, **Then** the section reveals with a subtle fade/slide animation
+3. **Given** a visitor scrolls through the page, **When** each section enters the viewport, **Then** the section reveals with a smooth scroll-reveal animation (IntersectionObserver-based)
+4. **Given** a visitor views any section with an illustration, **When** the illustration loads, **Then** they see an SVG illustration from unDraw with consistent #a1cd40 accent color
 
 ---
 
@@ -39,19 +46,22 @@ A visitor wants to quickly jump to specific sections of interest (e.g., Services
 
 ---
 
-### User Story 3 - Experience Brand-Consistent Visuals (Priority: P2)
+### User Story 3 - Experience Premium Futuristic Visuals (Priority: P2)
 
-A visitor experiences the page with visual elements that reinforce the GRIT brand identity - including the primary green color (#a1cd40), dark backgrounds, custom illustrations from each slide, and interactive micro-animations.
+A visitor experiences the page with a modern, elegant, futuristic design that reinforces the GRIT brand identity - including the primary green color (#a1cd40), dark futuristic backgrounds (#0b0f14 / #0a0a0a), abstract/tech-style unDraw SVG illustrations, and premium micro-interactions.
 
-**Why this priority**: Brand consistency builds trust and professionalism. Visual polish differentiates a professional agency.
+**Why this priority**: Brand consistency and premium visual polish builds trust and differentiates a professional marketing agency. The design must feel alive, not slide-like.
 
-**Independent Test**: Can be fully tested by visual inspection against PDF reference, checking color values, verifying illustrations are cropped (not full slides), and testing hover states.
+**Independent Test**: Can be fully tested by visual inspection checking color values (#a1cd40 accent, dark backgrounds), verifying illustrations are unDraw SVGs with recolored accent, testing hover states with glow effects, and confirming animated elements.
 
 **Acceptance Scenarios**:
 
-1. **Given** any section with a heading, **When** the heading is displayed, **Then** it has a small #a1cd40 underline accent matching the PDF style
-2. **Given** any card or interactive element, **When** the visitor hovers over it, **Then** a soft green glow effect (#a1cd40 at low opacity) appears
+1. **Given** any section with a heading, **When** the heading is displayed, **Then** it uses large, modern typography with comfortable line-height
+2. **Given** any card or interactive element, **When** the visitor hovers over it, **Then** a soft green glow effect (#a1cd40 at low opacity) appears with hover lift animation
 3. **Given** any bullet list on the page, **When** displayed, **Then** bullets use custom green (#a1cd40) dot styling
+4. **Given** the page background, **When** viewed, **Then** an animated gradient orb effect is visible (CSS-only, subtle)
+5. **Given** the header, **When** scrolling, **Then** a sticky glass header with backdrop blur effect is visible
+6. **Given** any button, **When** hovered, **Then** a neon-ish outline/solid variant effect with hover lift is visible
 
 ---
 
@@ -103,85 +113,98 @@ A visitor accesses the landing page from various devices (desktop, tablet, mobil
   15. Thank You footer
 
 #### Visual/Brand Requirements
-- **FR-004**: Page MUST use primary accent color #a1cd40 for bullets, heading underlines, buttons, and interactive highlights
-- **FR-005**: Page MUST use dark background colors (#0b0b0b or #111) with subtle gradient and noise texture
-- **FR-006**: Page MUST display only cropped illustration assets from PDF slides (NOT full-slide screenshots)
-- **FR-007**: Each section MUST include the corresponding illustration cropped from its PDF slide:
-  - hero.png (page 1 - concentric circles and logo)
-  - who-we-are.png (page 2 - question mark graphic)
-  - about-us.png (page 3 - team illustration with leaves)
-  - creative-philosophy.png (page 4 - lightbulb with gear)
-  - vision-mission.png (page 5 - arrow hitting targets)
-  - agility.png (page 6 - impossible triangle with businesspeople)
-  - services-wheel.png (page 7 - service wheel diagram)
-  - medical.png (page 8 - caduceus medical symbol)
-  - digital.png (page 9 - digital marketing icons collage)
-  - multimedia.png (page 10 - social/multimedia icons)
-  - production.png (page 11 - lightbulb illustration)
-  - process.png (page 12 - vertical process timeline)
-  - why-choose-us.png (page 13 - handshake in circle)
-  - contact.png (page 14 - vintage telephone)
-- **FR-008**: Page MUST include GRIT logo extracted from PDF
+- **FR-004**: Page MUST use primary accent color #a1cd40 for bullets, heading accents, buttons, and interactive highlights
+- **FR-005**: Page MUST use dark futuristic background colors (#0b0f14 or #0a0a0a) with subtle gradients and glow accents
+- **FR-006**: Page MUST display SVG illustrations from unDraw.co (NOT cropped PDF images)
+- **FR-007**: Each section MUST include a thematically-matched unDraw SVG illustration with the following mapping:
+  - hero.svg (marketing team / growth / strategy theme)
+  - who-we-are.svg (team / collaboration theme)
+  - about.svg (analytics / planning theme)
+  - philosophy.svg (creativity / ideas / innovation theme)
+  - vision.svg (target / goals / roadmap theme)
+  - agility.svg (sprint / iteration / fast delivery theme)
+  - services.svg (services / solutions theme)
+  - medical.svg (healthcare / doctor / medicine theme)
+  - digital.svg (social media / SEO / analytics theme)
+  - multimedia.svg (video / camera / press / media theme)
+  - production.svg (design / production / studio theme)
+  - process.svg (workflow / steps / process theme)
+  - why.svg (trust / quality / success theme)
+  - contact.svg (contact / email / location theme)
+- **FR-008**: All unDraw SVG illustrations MUST be recolored to use #a1cd40 as the accent color (replacing default unDraw colors like #6c63ff)
+- **FR-009**: Page MUST include GRIT logo (text-based or extracted from brand assets)
+- **FR-010**: Illustrations MUST be corporate/professional style (abstract/tech scenes, not cartoonish or playful)
 
 #### Layout Requirements
-- **FR-009**: Content sections MUST alternate between text-left/image-right and image-left/text-right layouts
-- **FR-010**: Page MUST have a sticky header with navigation links
-- **FR-011**: Navigation MUST include smooth scroll behavior when clicking section links
-- **FR-012**: Mobile view MUST include a hamburger menu toggle for navigation
+- **FR-011**: Content sections MUST alternate between text-left/image-right and image-left/text-right layouts
+- **FR-012**: Page MUST have a sticky glass header with backdrop blur effect and navigation links
+- **FR-013**: Navigation MUST include smooth scroll behavior when clicking section links
+- **FR-014**: Mobile view MUST include a hamburger menu toggle with slide-down navigation
+- **FR-028**: Header navigation MUST include only main content sections: Who We Are, About Us, Our Creative Philosophy, Vision & Mission, We Belive in Agitlity, Our Services, Medical Marketing, Digital Marketing, Multimedia & PR, Creative & Production Services, Our Process, Why Clients Choose Us, Contact Information (excludes Hero and Thank You)
 
 #### Animation/Interaction Requirements
-- **FR-013**: Page MUST implement scroll-reveal animations (sections fade/slide in when entering viewport)
-- **FR-014**: Cards and interactive elements MUST have hover states with soft green glow
-- **FR-015**: Buttons MUST have hover lift and sheen effects
-- **FR-016**: Navigation links MUST highlight based on current scroll position
+- **FR-015**: Page MUST implement scroll-reveal animations using IntersectionObserver (sections fade/slide in when entering viewport)
+- **FR-016**: Cards and interactive elements MUST have hover states with soft green glow (#a1cd40 at low opacity)
+- **FR-017**: Buttons MUST have hover lift effects with neon-ish outline/solid variants
+- **FR-018**: Navigation links MUST highlight based on current scroll position (active nav indicator)
+- **FR-019**: Page MUST include animated gradient orb background (CSS-only, subtle movement)
+- **FR-020**: Heading underlines MUST have subtle animation on hover
 
 #### Technical Requirements
-- **FR-017**: Page MUST use HTML, CSS, JavaScript, and jQuery only (no React/Vue/build tools)
-- **FR-018**: Page MUST use Tailwind CSS via CDN
-- **FR-019**: Images (except hero) MUST use lazy loading (`loading="lazy"`)
-- **FR-020**: Page MUST include semantic HTML structure with proper heading hierarchy
-- **FR-021**: All images MUST have descriptive alt text
-- **FR-022**: Interactive elements MUST have visible keyboard focus styles
+- **FR-021**: Page MUST use HTML, CSS, JavaScript, and jQuery only (no React/Vue/build tools)
+- **FR-022**: Page MUST use Tailwind CSS via CDN with inline config defining colors.primary = "#a1cd40"
+- **FR-023**: SVG illustrations (except hero) MUST use lazy loading where supported
+- **FR-024**: Page MUST include semantic HTML structure with proper heading hierarchy
+- **FR-025**: All illustrations MUST have descriptive alt text
+- **FR-026**: Interactive elements MUST have visible keyboard focus styles
+- **FR-027**: Animations MUST respect `prefers-reduced-motion` media query
 
 ### Key Entities
 
-- **Section**: A distinct content block containing a heading, body text, and illustration image corresponding to one PDF slide
-- **Navigation Item**: A link in the header that points to a specific section and indicates active state based on scroll position
-- **Illustration Asset**: A cropped image extracted from a PDF slide containing only the visual element (not full slide background)
-- **Brand Color**: The primary accent color (#a1cd40) used consistently for interactive and decorative elements
+- **Section**: A distinct content block containing a heading, body text, and thematically-matched unDraw SVG illustration
+- **Navigation Item**: A link in the glass header that points to a specific section and indicates active state based on scroll position
+- **unDraw Illustration**: An SVG illustration from unDraw.co, recolored to use #a1cd40 as the accent color, matching the section's theme
+- **Brand Color**: The primary accent color (#a1cd40) used consistently for illustrations, interactive elements, and decorative accents
+- **Glass Header**: A sticky navigation header with backdrop blur effect for a premium futuristic feel
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
 - **SC-001**: 100% of page text content matches the PDF verbatim (verified by comparison with source-copy.txt)
-- **SC-002**: 0 full-slide images used on the page - only cropped illustration assets from extracted-crops/ folder
+- **SC-002**: All 14 illustrations are SVGs from unDraw.co with #a1cd40 accent color (no cropped PDF images)
 - **SC-003**: All 14 content sections present and in correct order
-- **SC-004**: Primary color #a1cd40 used in all specified locations (bullets, underlines, buttons, hover states)
+- **SC-004**: Primary color #a1cd40 used consistently across all specified locations (illustrations, bullets, buttons, hover states, glow effects)
 - **SC-005**: Page achieves responsive layout at 3 breakpoints: mobile (375px), tablet (768px), desktop (1200px+)
 - **SC-006**: Navigation smooth-scrolls to correct section within 1 second of click
 - **SC-007**: Page loads with no JavaScript console errors
-- **SC-008**: All images have non-empty alt attributes
+- **SC-008**: All SVG illustrations have non-empty alt attributes
 - **SC-009**: All interactive elements (links, buttons) have visible focus indicators when focused via keyboard
 - **SC-010**: Scroll-reveal animations trigger when sections enter viewport (or degrade gracefully if JS disabled)
+- **SC-011**: Page looks modern/futuristic and does not resemble slides (visual verification)
+- **SC-012**: Glass header with backdrop blur effect is visible when scrolling
+- **SC-013**: Animated gradient orb background is present and subtle
+- **SC-014**: All hover effects (glow, lift, underline animations) function correctly
 
 ## Assumptions
 
-- The PDF file "Grit Profile 11-12.pdf" is the authoritative source for all content and visual reference
-- Tools for PDF-to-PNG conversion (pdftoppm or similar) and image cropping (ImageMagick or similar) are available on the system
-- The existing incorrect landing page can be completely replaced
+- The PDF file "Grit Profile 11-12.pdf" is the authoritative source for all text content (text extracted verbatim)
+- unDraw.co is available for downloading SVG illustrations (if unavailable, placeholder SVGs with TODO list will be used)
+- unDraw SVGs can be recolored by replacing accent colors (e.g., #6c63ff) with #a1cd40
+- The existing landing page can be completely replaced
 - jQuery CDN and Tailwind CDN will remain available
 - No backend functionality is required - this is a static landing page
 - Contact form submission (if any) is out of scope - only contact information display is required
+- Illustrations should be corporate/professional style, not playful or cartoonish
 
 ## Deliverables
 
-- `site/index.html` - Main landing page
-- `site/css/styles.css` - Custom styles
-- `site/js/main.js` - jQuery interactions and animations
-- `site/assets/extracted-crops/*` - Cropped illustration images
+- `site/index.html` - Main landing page with futuristic design
+- `site/css/styles.css` - Custom styles (animated backgrounds, glow effects, glass header)
+- `site/js/main.js` - jQuery interactions and animations (smooth scroll, mobile menu, scroll reveal, active nav)
+- `site/assets/illustrations/*.svg` - unDraw SVG illustrations recolored to #a1cd40
 - `site/content/source-copy.txt` - Verbatim text extracted from PDF
-- `site/README.md` - Setup instructions and asset mapping
+- `site/README.md` - Setup instructions, section-to-illustration mapping, and unDraw keywords used
 
 ## Content Reference (Verbatim from PDF)
 

@@ -1,138 +1,115 @@
 # Quickstart: Rebuild GRIT Landing Page
 
 **Created**: 2026-01-12
+**Updated**: 2026-01-13
 **Purpose**: Step-by-step guide to implement the landing page rebuild
 
 ## Prerequisites
 
-- macOS with Homebrew (tools already installed)
-- `pdftoppm` - PDF to image conversion
-- `magick` (ImageMagick) - Image cropping
 - Modern web browser for testing
-- Code editor (VS Code, etc.)
-
-Verify tools:
-```bash
-which pdftoppm && which magick
-# Should output paths to both tools
-```
+- Code editor (VS Code recommended)
+- Internet access (for unDraw.co and CDNs)
 
 ---
 
-## Phase 1: Extract Assets
+## Phase 1: Project Setup
 
 ### Step 1.1: Create Directory Structure
 
 ```bash
 cd /Users/iamb0ody/Desktop/mine/grit
 
-# Create asset directories
-mkdir -p assets/extracted-pages
-mkdir -p assets/extracted-crops
-mkdir -p content
+# Create site directory structure
+mkdir -p site/css
+mkdir -p site/js
+mkdir -p site/assets/illustrations
+mkdir -p site/content
 ```
 
-### Step 1.2: Render PDF Pages to PNG
+### Step 1.2: Create Base Files
 
 ```bash
-# Render all PDF pages at 220 DPI
-pdftoppm -png -r 220 " Grit Profile 11-12.pdf" "assets/extracted-pages/page"
-
-# Verify output (should have page-01.png through page-16.png)
-ls -la assets/extracted-pages/
-```
-
-### Step 1.3: Crop Illustrations
-
-Each page needs a specific crop to extract only the illustration. Open each `page-XX.png` in an image viewer to identify bounds, then run:
-
-```bash
-# Page 1 - Hero decorative circles (left side)
-magick "assets/extracted-pages/page-01.png" -crop 600x700+0+0 +repage "assets/extracted-crops/hero.png"
-
-# Page 1 - Logo (bottom right)
-magick "assets/extracted-pages/page-01.png" -crop 300x200+1100+550 +repage "assets/extracted-crops/logo.png"
-
-# Page 2 - Question mark (left side)
-magick "assets/extracted-pages/page-02.png" -crop 400x500+100+100 +repage "assets/extracted-crops/who-we-are.png"
-
-# Page 3 - Team illustration (right side)
-magick "assets/extracted-pages/page-03.png" -crop 600x500+850+150 +repage "assets/extracted-crops/about-us.png"
-
-# Page 4 - Lightbulb creative (left side)
-magick "assets/extracted-pages/page-04.png" -crop 500x550+50+100 +repage "assets/extracted-crops/creative-philosophy.png"
-
-# Page 5 - Arrow targets (right side)
-magick "assets/extracted-pages/page-05.png" -crop 500x500+950+50 +repage "assets/extracted-crops/vision-mission.png"
-
-# Page 6 - Impossible triangle (right side)
-magick "assets/extracted-pages/page-06.png" -crop 550x600+900+50 +repage "assets/extracted-crops/agility.png"
-
-# Page 7 - Services wheel (center)
-magick "assets/extracted-pages/page-07.png" -crop 900x550+280+150 +repage "assets/extracted-crops/services-wheel.png"
-
-# Page 8 - Caduceus (left side)
-magick "assets/extracted-pages/page-08.png" -crop 350x550+50+50 +repage "assets/extracted-crops/medical.png"
-
-# Page 9 - Digital icons (right side)
-magick "assets/extracted-pages/page-09.png" -crop 700x500+750+100 +repage "assets/extracted-crops/digital.png"
-
-# Page 10 - Multimedia icons (left side)
-magick "assets/extracted-pages/page-10.png" -crop 600x500+50+150 +repage "assets/extracted-crops/multimedia.png"
-
-# Page 11 - Production lightbulb (right side)
-magick "assets/extracted-pages/page-11.png" -crop 400x550+1050+50 +repage "assets/extracted-crops/production.png"
-
-# Page 12 - Process timeline (right side)
-magick "assets/extracted-pages/page-12.png" -crop 350x650+1100+20 +repage "assets/extracted-crops/process.png"
-
-# Page 13 - Handshake (left side)
-magick "assets/extracted-pages/page-13.png" -crop 450x450+50+150 +repage "assets/extracted-crops/why-choose-us.png"
-
-# Page 14 - Telephone (right side)
-magick "assets/extracted-pages/page-14.png" -crop 500x450+950+250 +repage "assets/extracted-crops/contact.png"
-```
-
-**Note**: Crop coordinates are approximate. Adjust based on actual rendered dimensions. Open the page PNG, identify the illustration bounds, and calculate WxH+X+Y.
-
-### Step 1.4: Verify Extractions
-
-```bash
-# List all cropped images
-ls -la assets/extracted-crops/
-
-# Should have 15 files:
-# logo.png, hero.png, who-we-are.png, about-us.png, creative-philosophy.png,
-# vision-mission.png, agility.png, services-wheel.png, medical.png,
-# digital.png, multimedia.png, production.png, process.png,
-# why-choose-us.png, contact.png
+touch site/index.html
+touch site/css/styles.css
+touch site/js/main.js
+touch site/content/source-copy.txt
+touch site/README.md
 ```
 
 ---
 
-## Phase 2: Extract Content
+## Phase 2: Source unDraw Illustrations
 
-### Step 2.1: Create Source Copy File
+### Step 2.1: Download SVGs from unDraw.co
 
-Create `content/source-copy.txt` with verbatim text from PDF. This serves as:
-1. Reference during implementation
-2. Verification source for QA
+Visit [unDraw.co/illustrations](https://undraw.co/illustrations) and search for each illustration using the keywords below. Download as SVG format.
 
+| Filename | Search Keywords | Style Notes |
+|----------|-----------------|-------------|
+| hero.svg | "marketing", "growth analytics" | Abstract/corporate, not cartoonish |
+| who-we-are.svg | "team collaboration", "creative team" | Professional team scene |
+| about.svg | "data reports", "analytics" | Business/data focused |
+| philosophy.svg | "creative thinking", "lightbulb moment" | Innovation theme |
+| vision.svg | "goals", "target" | Achievement/goals theme |
+| agility.svg | "scrum board", "agile" | Fast/iterative theme |
+| services.svg | "services", "web development" | Solutions theme |
+| medical.svg | "medicine", "doctors" | Healthcare theme |
+| digital.svg | "social media", "online world" | Digital/social theme |
+| multimedia.svg | "video files", "content creator" | Media production theme |
+| production.svg | "design tools", "designer" | Creative tools theme |
+| process.svg | "process", "steps" | Workflow theme |
+| why.svg | "agreement", "deal" | Trust/handshake theme |
+| contact.svg | "contact us", "personal info" | Communication theme |
+
+### Step 2.2: Recolor SVGs to Brand Color
+
+For each downloaded SVG:
+
+1. Open the SVG file in a text editor
+2. Find and replace the default unDraw color (usually `#6c63ff` or similar purple/blue)
+3. Replace with GRIT green: `#a1cd40`
+4. Save the file
+
+**Example sed command** (run from site/assets/illustrations/):
 ```bash
-# Create the content directory and file
-mkdir -p content
-touch content/source-copy.txt
+# Replace unDraw default purple with GRIT green
+sed -i '' 's/#6c63ff/#a1cd40/gi' *.svg
+sed -i '' 's/#6C63FF/#a1cd40/gi' *.svg
 ```
 
-Then copy all text content from the spec.md "Content Reference" section into this file.
+### Step 2.3: Verify Illustrations
+
+```bash
+# Check all SVGs exist
+ls -la site/assets/illustrations/
+
+# Should have 14 files:
+# hero.svg, who-we-are.svg, about.svg, philosophy.svg, vision.svg,
+# agility.svg, services.svg, medical.svg, digital.svg, multimedia.svg,
+# production.svg, process.svg, why.svg, contact.svg
+
+# Verify color replacement
+grep -l "a1cd40" site/assets/illustrations/*.svg | wc -l
+# Should return 14
+```
 
 ---
 
-## Phase 3: Build Landing Page
+## Phase 3: Create Source Content File
 
-### Step 3.1: HTML Structure
+### Step 3.1: Extract Text from Spec
 
-Create `index.html` with:
+Copy all content from the spec.md "Content Reference" section into `site/content/source-copy.txt`.
+
+This file serves as:
+1. Implementation reference
+2. QA verification source
+
+---
+
+## Phase 4: Build HTML Structure
+
+### Step 4.1: Create index.html
 
 ```html
 <!DOCTYPE html>
@@ -149,9 +126,15 @@ Create `index.html` with:
       theme: {
         extend: {
           colors: {
-            'grit-green': '#a1cd40',
-            'grit-dark': '#0b0b0b',
-            'grit-dark-alt': '#151515',
+            primary: '#a1cd40',
+            dark: {
+              DEFAULT: '#0a0a0a',
+              lighter: '#0b0f14',
+              card: '#151515'
+            }
+          },
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
           }
         }
       }
@@ -160,151 +143,234 @@ Create `index.html` with:
 
   <!-- Custom styles -->
   <link rel="stylesheet" href="css/styles.css">
-
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<body class="bg-grit-dark text-white">
-  <!-- Header with sticky nav -->
-  <header class="fixed top-0 w-full z-50 bg-grit-dark/90 backdrop-blur">
-    <!-- Navigation content -->
+<body class="bg-dark text-white font-sans">
+  <!-- Animated gradient orbs (background) -->
+  <div class="gradient-orb gradient-orb-1"></div>
+  <div class="gradient-orb gradient-orb-2"></div>
+
+  <!-- Glass header with navigation -->
+  <header class="glass-header fixed top-0 w-full z-50">
+    <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="text-2xl font-bold text-primary">GRIT</a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-6">
+        <!-- Nav links (13 items per FR-028) -->
+      </div>
+
+      <!-- Mobile menu toggle -->
+      <button id="menu-toggle" class="md:hidden" aria-label="Toggle menu" aria-expanded="false">
+        <!-- Hamburger icon -->
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <nav id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+      <!-- Mobile nav links -->
+    </nav>
   </header>
 
   <main>
     <!-- Section 1: Hero -->
-    <section id="hero">...</section>
+    <section id="hero" class="min-h-screen flex items-center">...</section>
 
-    <!-- Section 2: Who We Are -->
-    <section id="who-we-are">...</section>
-
-    <!-- Continue for all 15 sections -->
+    <!-- Section 2-14: Content sections (alternating layout) -->
+    <!-- Section 15: Thank You -->
   </main>
 
-  <!-- Footer -->
-  <footer>...</footer>
-
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <!-- Main JS -->
   <script src="js/main.js"></script>
 </body>
 </html>
 ```
 
-### Step 3.2: Section Template
+### Step 4.2: Section Template
 
-Each content section follows this pattern:
-
+**Text Left, Image Right:**
 ```html
-<!-- Text Left, Image Right -->
-<section id="section-id" class="py-20 bg-grit-dark">
+<section id="section-id" class="py-20 reveal-section">
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <!-- Text Block -->
       <div class="lg:w-1/2">
-        <h2 class="text-4xl font-bold mb-4 relative inline-block">
+        <h2 class="text-4xl font-bold mb-6 text-white">
           Section Title
-          <span class="absolute bottom-0 left-0 w-16 h-1 bg-grit-green"></span>
         </h2>
-        <p class="text-lg text-gray-300 mb-6">
-          Paragraph content...
+        <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+          Paragraph content from source-copy.txt...
         </p>
         <!-- Optional bullet list -->
-        <ul class="space-y-2">
+        <ul class="space-y-3">
           <li class="flex items-start">
-            <span class="w-2 h-2 bg-grit-green rounded-full mt-2 mr-3 flex-shrink-0"></span>
-            <span>Bullet item text</span>
+            <span class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+            <span class="text-gray-300">Bullet item text</span>
           </li>
         </ul>
       </div>
       <!-- Image Block -->
       <div class="lg:w-1/2">
         <img
-          src="assets/extracted-crops/section-image.png"
+          src="assets/illustrations/section.svg"
           alt="Descriptive alt text"
           loading="lazy"
-          class="w-full h-auto"
+          class="w-full h-auto max-w-md mx-auto"
         >
       </div>
     </div>
   </div>
 </section>
+```
 
-<!-- Image Left, Text Right (swap flex order) -->
-<section id="section-id" class="py-20 bg-grit-dark-alt">
+**Image Left, Text Right (alternate):**
+```html
+<section id="section-id" class="py-20 bg-dark-card reveal-section">
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
-      <!-- Same structure, reversed -->
+      <!-- Same structure, reversed flex direction -->
     </div>
   </div>
 </section>
 ```
 
-### Step 3.3: CSS Styles
+---
 
-Create `css/styles.css`:
+## Phase 5: Create CSS Styles
+
+### Step 5.1: styles.css
 
 ```css
-/* Noise texture overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,..."); /* SVG noise */
+/* Glass header */
+.glass-header {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(161, 205, 64, 0.1);
 }
 
-/* Scroll reveal */
-.reveal-hidden {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .reveal-hidden {
-    opacity: 1;
-    transform: none;
-    transition: none;
+@supports not (backdrop-filter: blur(12px)) {
+  .glass-header {
+    background: rgba(10, 10, 10, 0.95);
   }
 }
 
-/* Button hover effects */
-.btn-primary {
-  @apply bg-grit-green text-grit-dark font-semibold px-6 py-3 rounded-lg;
-  @apply transition-all duration-300;
-  @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-grit-green/30;
+/* Animated gradient orbs */
+.gradient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Card hover glow */
-.card-hover {
-  @apply transition-shadow duration-300;
-  @apply hover:shadow-lg hover:shadow-grit-green/20;
+.gradient-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(161, 205, 64, 0.15) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  animation: float 20s ease-in-out infinite;
 }
 
-/* Navigation active state */
-nav a.active {
-  @apply text-grit-green;
+.gradient-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(161, 205, 64, 0.1) 0%, transparent 70%);
+  bottom: -100px;
+  left: -50px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(50px, -30px) scale(1.05); }
+  50% { transform: translate(-30px, 50px) scale(0.95); }
+  75% { transform: translate(-50px, -20px) scale(1.02); }
+}
+
+/* Scroll reveal */
+.reveal-section {
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Hover glow effect */
+.glow-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glow-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(161, 205, 64, 0.2),
+              0 0 60px rgba(161, 205, 64, 0.1);
+}
+
+/* Button styles */
+.btn-outline {
+  border: 2px solid #a1cd40;
+  color: #a1cd40;
+  background: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #a1cd40;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(161, 205, 64, 0.4);
+}
+
+.btn-solid {
+  background: #a1cd40;
+  color: #0a0a0a;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(161, 205, 64, 0.5);
 }
 
 /* Focus styles */
-a:focus-visible, button:focus-visible {
-  @apply outline-2 outline-offset-2 outline-grit-green;
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #a1cd40;
+  outline-offset: 2px;
+}
+
+/* Active nav link */
+nav a.active {
+  color: #a1cd40;
+  border-bottom: 2px solid #a1cd40;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-orb {
+    animation: none;
+  }
+  .reveal-section {
+    transition: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 ```
 
-### Step 3.4: JavaScript Interactions
+---
 
-Create `js/main.js`:
+## Phase 6: Create JavaScript Interactions
+
+### Step 6.1: main.js
 
 ```javascript
 $(document).ready(function() {
@@ -314,79 +380,114 @@ $(document).ready(function() {
     const target = $(this.getAttribute('href'));
     if (target.length) {
       $('html, body').animate({
-        scrollTop: target.offset().top - 80
+        scrollTop: target.offset().top - 80 // Account for fixed header
       }, 800);
     }
+
+    // Close mobile menu if open
+    $('#mobile-menu').addClass('hidden');
+    $('#menu-toggle').attr('aria-expanded', 'false');
   });
 
   // Mobile menu toggle
   $('#menu-toggle').on('click', function() {
+    const isExpanded = $(this).attr('aria-expanded') === 'true';
+    $(this).attr('aria-expanded', !isExpanded);
     $('#mobile-menu').toggleClass('hidden');
   });
 
   // Scroll reveal with Intersection Observer
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-visible');
-        entry.target.classList.remove('reveal-hidden');
-      }
-    });
-  }, { threshold: 0.1 });
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          $(entry.target)
+            .removeClass('opacity-0 translate-y-8')
+            .addClass('opacity-100 translate-y-0');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('section').forEach(section => {
-    section.classList.add('reveal-hidden');
-    revealObserver.observe(section);
-  });
+    $('.reveal-section').each(function() {
+      $(this).addClass('opacity-0 translate-y-8');
+      revealObserver.observe(this);
+    });
+  }
 
   // Active nav highlighting
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        $('nav a').removeClass('active');
-        $(`nav a[href="#${id}"]`).addClass('active');
-      }
-    });
-  }, { threshold: 0.5, rootMargin: '-50% 0px' });
+  if ('IntersectionObserver' in window) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          $('nav a').removeClass('active');
+          $(`nav a[href="#${id}"]`).addClass('active');
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
 
-  document.querySelectorAll('section[id]').forEach(section => {
-    navObserver.observe(section);
-  });
+    $('section[id]').each(function() {
+      navObserver.observe(this);
+    });
+  }
 });
 ```
 
 ---
 
-## Phase 4: Testing
+## Phase 7: Testing
 
-### Step 4.1: Local Development
-
-Open `index.html` directly in browser or use a simple HTTP server:
+### Step 7.1: Local Development
 
 ```bash
 # Option 1: Python HTTP server
+cd site
 python3 -m http.server 8000
+# Open http://localhost:8000
 
-# Option 2: Open directly
-open index.html
+# Option 2: Open directly (some features may not work)
+open site/index.html
 ```
 
-### Step 4.2: Quality Checklist
+### Step 7.2: Quality Checklist
 
-- [ ] All 14 content sections visible in correct order
-- [ ] All text matches source-copy.txt verbatim
-- [ ] All images are cropped illustrations (not full slides)
-- [ ] Smooth scroll working for all nav links
+**Content:**
+- [ ] All 15 sections visible in correct order
+- [ ] All text matches source-copy.txt verbatim (including typos)
+- [ ] Navigation has exactly 13 links (excludes Hero, Thank You)
+
+**Visual:**
+- [ ] All 14 illustrations are SVGs with #a1cd40 accent color
+- [ ] Glass header with blur effect visible
+- [ ] Animated gradient orbs in background
+- [ ] Dark background (#0a0a0a / #0b0f14)
+- [ ] Primary color #a1cd40 consistent throughout
+
+**Interactions:**
+- [ ] Smooth scroll for all nav links
 - [ ] Mobile menu toggle working
 - [ ] Scroll reveal animations triggering
 - [ ] Nav links highlighting on scroll
-- [ ] Responsive at mobile (375px), tablet (768px), desktop (1200px+)
-- [ ] No console errors
-- [ ] All images have alt text
-- [ ] Keyboard navigation working
+- [ ] Hover glow effects on cards/buttons
 
-### Step 4.3: Browser Testing
+**Responsive:**
+- [ ] Mobile (375px): Single column, stacked content
+- [ ] Tablet (768px): Transitions smoothly
+- [ ] Desktop (1200px+): Two-column alternating layout
+
+**Accessibility:**
+- [ ] All images have descriptive alt text
+- [ ] Keyboard navigation working (Tab, Enter)
+- [ ] Focus indicators visible
+- [ ] Reduced motion preference respected
+
+**Technical:**
+- [ ] No console errors
+- [ ] All assets loading (no 404s)
+- [ ] SVGs rendering correctly
+
+### Step 7.3: Browser Testing
 
 Test in all target browsers:
 - [ ] Chrome (latest)
@@ -398,30 +499,29 @@ Test in all target browsers:
 
 ---
 
-## Cleanup
-
-After successful implementation:
-
-```bash
-# Remove temporary full-page renders (optional, for space)
-rm -rf assets/extracted-pages/
-
-# Remove old full-slide images
-rm -rf assets/img/page-*.png
-```
-
----
-
 ## Troubleshooting
 
-### Crop coordinates wrong?
-Open the page-XX.png in Preview.app, use the selection tool to identify the illustration bounds, note the coordinates from the Info panel.
+### unDraw illustrations not found?
+- Try alternative search keywords
+- Select illustrations with similar themes
+- Ensure corporate/tech style, not cartoonish
 
-### Images too large/small?
-Adjust the source DPI in pdftoppm command (lower = smaller, higher = larger).
+### SVG colors not replaced?
+- Check for uppercase hex codes (#6C63FF vs #6c63ff)
+- Some SVGs use `fill="currentColor"` - add color via CSS
+- Verify the SVG isn't using inline styles
+
+### Glass header not blurring?
+- Check browser support for `backdrop-filter`
+- Verify fallback solid background is working
+- Safari requires `-webkit-backdrop-filter` prefix
+
+### Animations not respecting reduced motion?
+- Check `prefers-reduced-motion` media query
+- Verify CSS is not being overridden
+- Test in OS accessibility settings
 
 ### Tailwind classes not working?
-Ensure the Tailwind CDN script loads before your HTML content. Check browser console for errors.
-
-### Smooth scroll not working?
-Ensure jQuery loads before main.js. Check that section IDs match href values exactly.
+- Ensure CDN script loads before content
+- Check browser console for script errors
+- Verify custom config syntax is correct
