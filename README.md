@@ -19,11 +19,9 @@ This single-page website showcases GRIT Marketing Solutions' services, philosoph
 ### Local Development
 
 1. Clone or download this repository
-2. Navigate to the `site` directory
-3. Open `index.html` in your web browser
+2. Open `index.html` in your web browser
 
 ```bash
-cd site
 open index.html  # macOS
 # or
 start index.html # Windows
@@ -36,7 +34,7 @@ xdg-open index.html # Linux
 ## 📁 Folder Structure
 
 ```
-site/
+grit/
 ├── assets/
 │   └── img/              # Extracted PDF images (16 pages)
 │       ├── page-01.png   # Hero/Cover (GRIT logo)
@@ -58,6 +56,7 @@ site/
 │   └── styles.css        # Custom styles
 ├── js/
 │   └── main.js           # jQuery interactions
+├── .gitignore            # Git ignore file
 ├── index.html            # Main landing page
 └── README.md             # This file
 ```

@@ -7,3 +7,7 @@
 # IDE
 .vscode/
 .idea/
+
+# Claude Code configuration
+.claude/
+.specify/
