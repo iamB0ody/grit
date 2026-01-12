@@ -213,6 +213,17 @@ Potential additions for future versions:
 - [ ] Dark/Light theme toggle
 - [ ] Performance optimization (WebP images)
 
+## 📋 Project Constitution
+
+This project follows a strict constitution that governs all development work. See [`.specify/memory/constitution.md`](.specify/memory/constitution.md) for:
+
+- **8 Core Principles**: Brand fidelity, client-driven development, design consistency, content accuracy, performance, accessibility, maintainability, and browser compatibility
+- **Quality Standards**: Visual QA checklist, content review process, and testing approach
+- **Change Management**: Client approval process, version control practices, and emergency hotfix procedures
+- **Governance**: Amendment process and compliance review requirements
+
+**All contributors must review and follow the constitution before making changes.**
+
 ## 📄 License
 
 All rights reserved © 2026 GRIT Marketing Solutions
