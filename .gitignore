@@ -1,0 +1,9 @@
+# Source PDF (large binary file)
+*.pdf
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

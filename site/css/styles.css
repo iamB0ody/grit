@@ -1,0 +1,311 @@
+/* GRIT Marketing Solutions - Custom Styles */
+
+/* ===========================================
+   1. RESET & BASE STYLES
+   =========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===========================================
+   2. HEADER & NAVIGATION
+   =========================================== */
+
+#header {
+    background: transparent;
+}
+
+#header.scrolled {
+    background: rgba(11, 11, 11, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(161, 205, 64, 0.1);
+}
+
+.nav-link {
+    position: relative;
+    font-weight: 500;
+}
+
+.nav-link.active {
+    color: #a1cd40;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #a1cd40;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Mobile Menu */
+#mobile-menu {
+    transition: max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+#mobile-menu.active {
+    max-height: 300px;
+}
+
+/* ===========================================
+   3. HERO SECTION
+   =========================================== */
+
+#hero {
+    background: linear-gradient(135deg, #0b0b0b 0%, #151515 100%);
+    position: relative;
+}
+
+.hero-bg {
+    background-image: radial-gradient(circle at 20% 50%, rgba(161, 205, 64, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 80%, rgba(161, 205, 64, 0.05) 0%, transparent 50%);
+}
+
+.logo-large img {
+    filter: drop-shadow(0 0 30px rgba(161, 205, 64, 0.3));
+}
+
+/* ===========================================
+   4. BUTTONS
+   =========================================== */
+
+.cta-button {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(161, 205, 64, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(161, 205, 64, 0.4);
+}
+
+/* ===========================================
+   5. SECTIONS
+   =========================================== */
+
+.section-padding {
+    padding: 6rem 0;
+}
+
+@media (max-width: 768px) {
+    .section-padding {
+        padding: 4rem 0;
+    }
+}
+
+.section-heading {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    position: relative;
+    display: inline-block;
+}
+
+.section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #a1cd40;
+}
+
+.service-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #a1cd40;
+}
+
+@media (max-width: 768px) {
+    .section-heading {
+        font-size: 2rem;
+    }
+
+    .service-heading {
+        font-size: 1.75rem;
+    }
+}
+
+/* ===========================================
+   6. BULLET LISTS (GREEN DOTS)
+   =========================================== */
+
+.bullet-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.bullet-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: #a1cd40;
+    border-radius: 50%;
+}
+
+/* ===========================================
+   7. SERVICE BLOCKS
+   =========================================== */
+
+.service-block {
+    transition: transform 0.3s ease;
+}
+
+.service-block:hover {
+    transform: translateY(-5px);
+}
+
+/* ===========================================
+   8. PROCESS STEPS
+   =========================================== */
+
+.process-step h3 {
+    color: #a1cd40;
+}
+
+/* ===========================================
+   9. WHY US LIST
+   =========================================== */
+
+.why-list p {
+    position: relative;
+    padding-left: 30px;
+}
+
+.why-list p::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #a1cd40;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* ===========================================
+   10. ANIMATIONS
+   =========================================== */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================
+   11. CONTACT SECTION
+   =========================================== */
+
+.contact-details a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===========================================
+   12. FOOTER
+   =========================================== */
+
+footer {
+    border-top: 2px solid #a1cd40;
+}
+
+/* ===========================================
+   13. RESPONSIVE UTILITIES
+   =========================================== */
+
+@media (max-width: 768px) {
+    .grid.md\\:grid-cols-2 > .graphic {
+        margin-bottom: 2rem;
+    }
+
+    .grid.md\\:grid-cols-2 > .content {
+        text-align: left;
+    }
+}
+
+/* ===========================================
+   14. LOADING & LAZY IMAGES
+   =========================================== */
+
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* ===========================================
+   15. ACCESSIBILITY
+   =========================================== */
+
+a:focus,
+button:focus {
+    outline: 2px solid #a1cd40;
+    outline-offset: 2px;
+}
+
+/* ===========================================
+   16. CUSTOM SCROLLBAR
+   =========================================== */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a1cd40;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8ab335;
+}
