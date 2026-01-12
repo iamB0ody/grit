@@ -5,7 +5,7 @@
    Glass Header
    ======================================== */
 .glass-header {
-  background: rgba(10, 10, 10, 0.7);
+  background: #1d1d1c;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px); /* Safari */
   border-bottom: 1px solid rgba(161, 205, 64, 0.1);
@@ -14,7 +14,7 @@
 /* Fallback for browsers without backdrop-filter support */
 @supports not (backdrop-filter: blur(12px)) {
   .glass-header {
-    background: rgba(10, 10, 10, 0.95);
+    background: #1d1d1c;
   }
 }
 
