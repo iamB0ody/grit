@@ -1,399 +1,466 @@
 /* GRIT Marketing Solutions - Custom Styles */
+/* Futuristic landing page with glass header, animated orbs, and glow effects */
 
-/* ===========================================
-   1. RESET & BASE STYLES
-   =========================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ========================================
+   Glass Header
+   ======================================== */
+.glass-header {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari */
+  border-bottom: 1px solid rgba(161, 205, 64, 0.1);
 }
 
-/* Noise texture overlay */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass-header {
+    background: rgba(10, 10, 10, 0.95);
+  }
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
-    scroll-behavior: smooth;
+/* ========================================
+   Animated Gradient Orbs
+   ======================================== */
+.gradient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+.gradient-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(161, 205, 64, 0.15) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  animation: float 20s ease-in-out infinite;
 }
 
-/* ===========================================
-   2. HEADER & NAVIGATION
-   =========================================== */
-
-#header {
-    background: transparent;
+.gradient-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(161, 205, 64, 0.1) 0%, transparent 70%);
+  bottom: -100px;
+  left: -50px;
+  animation: float 25s ease-in-out infinite reverse;
 }
 
-#header.scrolled {
-    background: rgba(11, 11, 11, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(161, 205, 64, 0.1);
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(50px, -30px) scale(1.05);
+  }
+  50% {
+    transform: translate(-30px, 50px) scale(0.95);
+  }
+  75% {
+    transform: translate(-50px, -20px) scale(1.02);
+  }
 }
 
-.nav-link {
-    position: relative;
-    font-weight: 500;
+/* ========================================
+   Scroll Reveal
+   ======================================== */
+.reveal-section {
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.nav-link.active {
-    color: #a1cd40;
+/* ========================================
+   Hover Effects for Illustrations
+   ======================================== */
+.glow-hover {
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #a1cd40;
-    transition: width 0.3s ease;
+.glow-hover:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
+/* ========================================
+   Button Styles
+   ======================================== */
+.btn-outline {
+  border: 2px solid #a1cd40;
+  color: #a1cd40;
+  background: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
 }
 
-/* Mobile Menu */
-#mobile-menu {
-    transition: max-height 0.3s ease;
-    max-height: 0;
-    overflow: hidden;
+.btn-outline:hover {
+  background: #a1cd40;
+  color: #0a0a0a;
+  box-shadow: 0 0 20px rgba(161, 205, 64, 0.4);
 }
 
-#mobile-menu.active {
-    max-height: 300px;
+.btn-solid {
+  background: #a1cd40;
+  color: #0a0a0a;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
 }
 
-/* ===========================================
-   3. HERO SECTION
-   =========================================== */
-
-#hero {
-    background: linear-gradient(135deg, #0b0b0b 0%, #151515 100%);
-    position: relative;
+.btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(161, 205, 64, 0.5);
 }
 
-.hero-bg {
-    background-image: radial-gradient(circle at 20% 50%, rgba(161, 205, 64, 0.1) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 80%, rgba(161, 205, 64, 0.05) 0%, transparent 50%);
-}
-
-.logo-large img {
-    filter: drop-shadow(0 0 30px rgba(161, 205, 64, 0.3));
-}
-
-/* ===========================================
-   4. BUTTONS
-   =========================================== */
-
-.cta-button {
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(161, 205, 64, 0.3);
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(161, 205, 64, 0.4);
-}
-
-/* Primary button with hover lift and sheen */
-.btn-primary {
-    background-color: #a1cd40;
-    color: #0b0b0b;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(161, 205, 64, 0.4);
-}
-
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
-}
-
-.btn-primary:hover::before {
-    left: 100%;
-}
-
-/* Card hover glow effect */
-.card-hover {
-    transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-    box-shadow: 0 8px 24px rgba(161, 205, 64, 0.2);
-    transform: translateY(-4px);
-}
-
-/* ===========================================
-   5. SECTIONS
-   =========================================== */
-
-.section-padding {
-    padding: 6rem 0;
-}
-
-@media (max-width: 768px) {
-    .section-padding {
-        padding: 4rem 0;
-    }
-}
-
-.section-heading {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #ffffff;
-    position: relative;
-    display: inline-block;
-}
-
-.section-heading::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: #a1cd40;
-}
-
-.service-heading {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #a1cd40;
-}
-
-@media (max-width: 768px) {
-    .section-heading {
-        font-size: 2rem;
-    }
-
-    .service-heading {
-        font-size: 1.75rem;
-    }
-}
-
-/* ===========================================
-   6. BULLET LISTS (GREEN DOTS)
-   =========================================== */
-
-.bullet-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.bullet-list li {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 12px;
-    line-height: 1.8;
-}
-
-.bullet-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 10px;
-    height: 10px;
-    background: #a1cd40;
-    border-radius: 50%;
-}
-
-/* ===========================================
-   7. SERVICE BLOCKS
-   =========================================== */
-
-.service-block {
-    transition: transform 0.3s ease;
-}
-
-.service-block:hover {
-    transform: translateY(-5px);
-}
-
-/* ===========================================
-   8. PROCESS STEPS
-   =========================================== */
-
-.process-step h3 {
-    color: #a1cd40;
-}
-
-/* ===========================================
-   9. WHY US LIST
-   =========================================== */
-
-.why-list p {
-    position: relative;
-    padding-left: 30px;
-}
-
-.why-list p::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #a1cd40;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-/* ===========================================
-   10. ANIMATIONS
-   =========================================== */
-
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Scroll reveal classes */
-.reveal-hidden {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .reveal-hidden,
-    .fade-in {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-    * {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* ===========================================
-   11. CONTACT SECTION
-   =========================================== */
-
-.contact-details a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* ===========================================
-   12. FOOTER
-   =========================================== */
-
-footer {
-    border-top: 2px solid #a1cd40;
-}
-
-/* ===========================================
-   13. RESPONSIVE UTILITIES
-   =========================================== */
-
-@media (max-width: 768px) {
-    .grid.md\\:grid-cols-2 > .graphic {
-        margin-bottom: 2rem;
-    }
-
-    .grid.md\\:grid-cols-2 > .content {
-        text-align: left;
-    }
-}
-
-/* ===========================================
-   14. LOADING & LAZY IMAGES
-   =========================================== */
-
-img[loading="lazy"] {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-img[loading="lazy"].loaded {
-    opacity: 1;
-}
-
-/* ===========================================
-   15. ACCESSIBILITY
-   =========================================== */
-
+/* ========================================
+   Focus Styles (Accessibility)
+   ======================================== */
 a:focus-visible,
 button:focus-visible {
-    outline: 2px solid #a1cd40;
-    outline-offset: 2px;
+  outline: 2px solid #a1cd40;
+  outline-offset: 2px;
 }
 
-a:focus,
-button:focus {
-    outline: 2px solid #a1cd40;
-    outline-offset: 2px;
+/* ========================================
+   Active Navigation Link
+   ======================================== */
+nav a.active {
+  color: #a1cd40;
+  border-bottom: 2px solid #a1cd40;
 }
 
-/* ===========================================
-   16. CUSTOM SCROLLBAR
-   =========================================== */
-
-::-webkit-scrollbar {
-    width: 12px;
+/* ========================================
+   Custom Bullet Lists
+   ======================================== */
+.custom-bullet {
+  list-style: none;
+  padding-left: 0;
 }
 
-::-webkit-scrollbar-track {
-    background: #0b0b0b;
+.custom-bullet li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #a1cd40;
-    border-radius: 6px;
+.custom-bullet li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #a1cd40;
+  border-radius: 50%;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #8ab335;
+/* ========================================
+   Section Transitions
+   ======================================== */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   Navigation Menu
+   ======================================== */
+#mobile-menu {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  background: rgba(21, 21, 21, 0.95);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (min-width: 768px) {
+  #mobile-menu {
+    max-width: 500px;
+  }
+}
+
+/* ========================================
+   Hamburger Menu Icon
+   ======================================== */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger span {
+  width: 1.5rem;
+  height: 2px;
+  background: #a1cd40;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========================================
+   Reduced Motion Preferences
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-orb {
+    animation: none;
+  }
+
+  .reveal-section {
+    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   Smooth Scrolling
+   ======================================== */
+/* Smooth scrolling is handled by jQuery animate() in main.js */
+/* CSS scroll-behavior disabled to prevent conflicts */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ========================================
+   DESKTOP DROPDOWN NAVIGATION
+   ======================================== */
+
+/* Dropdown wrapper positioning context */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+/* Bridge area to prevent dropdown from closing when moving mouse */
+.nav-dropdown-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  pointer-events: none;
+}
+
+.nav-dropdown-wrapper:hover::after {
+  pointer-events: auto;
+}
+
+/* Dropdown trigger button - styled as nav link */
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+
+/* Chevron icon styling */
+.dropdown-chevron {
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+}
+
+.nav-dropdown-trigger:hover .dropdown-chevron,
+.nav-dropdown-trigger[aria-expanded="true"] .dropdown-chevron {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu container */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 200px;
+  background: rgba(11, 11, 11, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(161, 205, 64, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+  list-style: none;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(161, 205, 64, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Show dropdown on hover or when expanded */
+.nav-dropdown-wrapper:hover .nav-dropdown,
+.nav-dropdown-wrapper:focus-within .nav-dropdown,
+.nav-dropdown.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Dropdown links */
+.dropdown-link {
+  display: block;
+  padding: 0.625rem 1.25rem;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-size: 0.9375rem;
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus {
+  background: rgba(161, 205, 64, 0.1);
+  color: #a1cd40;
+  outline: none;
+}
+
+.dropdown-link.active {
+  color: #a1cd40;
+  background: rgba(161, 205, 64, 0.05);
+  border-left: 3px solid #a1cd40;
+  padding-left: calc(1.25rem - 3px);
+}
+
+/* Parent category active state (when child is active) */
+.nav-dropdown-trigger.parent-active {
+  color: #a1cd40;
+  position: relative;
+}
+
+.nav-dropdown-trigger.parent-active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #a1cd40;
+}
+
+/* ========================================
+   MOBILE ACCORDION NAVIGATION
+   ======================================== */
+
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0;
+}
+
+/* Accordion trigger button */
+.mobile-nav-accordion-trigger {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.mobile-nav-accordion-trigger:hover,
+.mobile-nav-accordion-trigger:focus {
+  color: #a1cd40;
+  outline: none;
+}
+
+/* Active accordion trigger (when child is active) */
+.mobile-nav-accordion-trigger.parent-active {
+  color: #a1cd40;
+}
+
+/* Chevron rotation */
+.mobile-chevron {
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-accordion-trigger[aria-expanded="true"] .mobile-chevron {
+  transform: rotate(180deg);
+}
+
+/* Accordion content */
+.mobile-accordion-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.mobile-accordion-content.expanded {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Mobile nav links (nested) */
+.mobile-nav-link.active {
+  color: #a1cd40;
+  font-weight: 600;
+  border-left: 3px solid #a1cd40;
+  padding-left: 0.5rem;
+}
+
+/* Touch target sizing for mobile */
+@media (max-width: 768px) {
+  .mobile-nav-accordion-trigger {
+    min-height: 44px;
+  }
+
+  .mobile-nav-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .nav-dropdown {
+    min-width: 180px;
+    font-size: 0.875rem;
+  }
 }

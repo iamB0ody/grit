@@ -1,239 +1,299 @@
 /**
  * GRIT Marketing Solutions - Main JavaScript
- * jQuery interactions for smooth scrolling, mobile menu, and animations
+ * Features: Smooth scroll, mobile menu, scroll reveal, active nav highlighting
  */
 
 $(document).ready(function() {
 
-    // ===========================================
-    // 1. SMOOTH SCROLLING FOR NAV LINKS
-    // ===========================================
+  // ========================================
+  // Smooth Scroll for Navigation Links
+  // ========================================
+  $('a[href^="#"]').on('click', function(e) {
+    e.preventDefault();
+    const target = $(this.getAttribute('href'));
 
-    $('a[href^="#"]').on('click', function(e) {
-        e.preventDefault();
-
-        const target = $(this.getAttribute('href'));
-
-        if (target.length) {
-            const headerHeight = $('#header').outerHeight();
-            const targetPosition = target.offset().top - headerHeight;
-
-            $('html, body').stop().animate({
-                scrollTop: targetPosition
-            }, 800, 'swing');
-
-            // Close mobile menu if open
-            $('#mobile-menu').removeClass('active');
-            $('#menu-icon').text('☰');
-        }
-    });
-
-    // ===========================================
-    // 2. STICKY HEADER ON SCROLL
-    // ===========================================
-
-    let lastScrollTop = 0;
-
-    $(window).on('scroll', debounce(function() {
-        const scrollTop = $(this).scrollTop();
-
-        // Add scrolled class when scrolled down
-        if (scrollTop > 50) {
-            $('#header').addClass('scrolled');
-        } else {
-            $('#header').removeClass('scrolled');
-        }
-
-        // Update active nav link based on scroll position
-        updateActiveNavLink();
-
-        lastScrollTop = scrollTop;
-    }, 10));
-
-    // ===========================================
-    // 3. MOBILE MENU TOGGLE
-    // ===========================================
-
-    $('#mobile-menu-toggle').on('click', function() {
-        const mobileMenu = $('#mobile-menu');
-        const menuIcon = $('#menu-icon');
-
-        mobileMenu.toggleClass('active');
-
-        if (mobileMenu.hasClass('active')) {
-            menuIcon.text('✕');
-        } else {
-            menuIcon.text('☰');
-        }
-    });
-
-    // Close mobile menu when clicking outside
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest('#header').length) {
-            $('#mobile-menu').removeClass('active');
-            $('#menu-icon').text('☰');
-        }
-    });
-
-    // ===========================================
-    // 4. ACTIVE NAV LINK HIGHLIGHTING
-    // ===========================================
-
-    function updateActiveNavLink() {
-        const scrollPos = $(window).scrollTop() + $('#header').outerHeight() + 100;
-
-        $('section[id]').each(function() {
-            const section = $(this);
-            const sectionTop = section.offset().top;
-            const sectionBottom = sectionTop + section.outerHeight();
-            const sectionId = section.attr('id');
-
-            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                $('.nav-link, .mobile-nav-link').removeClass('active');
-                $(`.nav-link[href="#${sectionId}"], .mobile-nav-link[href="#${sectionId}"]`).addClass('active');
-            }
-        });
+    if (target.length) {
+      $('html, body').animate({
+        scrollTop: target.offset().top - 80 // Account for fixed header height
+      }, 800);
     }
 
-    // ===========================================
-    // 5. SCROLL ANIMATIONS (INTERSECTION OBSERVER)
-    // ===========================================
+    // Close mobile menu if open
+    if ($('#mobile-menu').is(':visible')) {
+      $('#mobile-menu').addClass('hidden');
+      $('#menu-toggle').attr('aria-expanded', 'false');
+      $('.hamburger').removeClass('active');
+    }
+  });
 
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+  // ========================================
+  // Mobile Menu Toggle
+  // ========================================
+  $('#menu-toggle').on('click', function() {
+    const isExpanded = $(this).attr('aria-expanded') === 'true';
+    $(this).attr('aria-expanded', !isExpanded);
+    $('#mobile-menu').toggleClass('hidden');
+    $('.hamburger').toggleClass('active');
+  });
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                $(entry.target).addClass('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe all fade-in elements
-    $('.fade-in').each(function() {
-        observer.observe(this);
-    });
-
-    // ===========================================
-    // 6. LAZY LOAD IMAGES
-    // ===========================================
-
-    const imageObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                $(img).addClass('loaded');
-                imageObserver.unobserve(img);
-            }
-        });
+  // ========================================
+  // Scroll Reveal with Intersection Observer
+  // ========================================
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          $(entry.target)
+            .removeClass('opacity-0 translate-y-8')
+            .addClass('opacity-100 translate-y-0');
+          // Unobserve after revealing (one-time animation)
+          revealObserver.unobserve(entry.target);
+        }
+      });
     }, {
-        threshold: 0.1,
-        rootMargin: '50px'
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     });
 
-    // Observe all lazy-load images
-    $('img[loading="lazy"]').each(function() {
-        imageObserver.observe(this);
+    // Add initial hidden state and observe all reveal sections
+    $('.reveal-section').each(function() {
+      $(this).addClass('opacity-0 translate-y-8');
+      revealObserver.observe(this);
+    });
+  } else {
+    // Fallback: Show all sections immediately if IntersectionObserver not supported
+    $('.reveal-section').removeClass('opacity-0 translate-y-8');
+  }
+
+  // ========================================
+  // Desktop Dropdown Navigation
+  // ========================================
+  function initDesktopDropdowns() {
+    const dropdownWrappers = $('.nav-dropdown-wrapper');
+
+    dropdownWrappers.each(function() {
+      const wrapper = $(this);
+      const trigger = wrapper.find('.nav-dropdown-trigger');
+      const dropdown = wrapper.find('.nav-dropdown');
+
+      // Hover behavior
+      wrapper.on('mouseenter', function() {
+        openDropdown(trigger, dropdown);
+      });
+
+      wrapper.on('mouseleave', function() {
+        closeDropdown(trigger, dropdown);
+      });
+
+      // Click toggle for touch devices
+      trigger.on('click', function(e) {
+        e.preventDefault();
+        if (dropdown.hasClass('show')) {
+          closeDropdown(trigger, dropdown);
+        } else {
+          $('.nav-dropdown').removeClass('show').addClass('hidden');
+          $('.nav-dropdown-trigger').attr('aria-expanded', 'false');
+          openDropdown(trigger, dropdown);
+        }
+      });
+
+      // Keyboard navigation
+      trigger.on('keydown', function(e) {
+        switch(e.key) {
+          case 'Enter':
+          case ' ':
+          case 'ArrowDown':
+            e.preventDefault();
+            if (!dropdown.hasClass('show')) {
+              openDropdown(trigger, dropdown);
+            }
+            dropdown.find('.dropdown-link').first().focus();
+            break;
+          case 'Escape':
+            e.preventDefault();
+            closeDropdown(trigger, dropdown);
+            trigger.focus();
+            break;
+        }
+      });
+
+      // Dropdown item keyboard navigation
+      dropdown.find('.dropdown-link').on('keydown', function(e) {
+        const items = dropdown.find('.dropdown-link');
+        const currentIndex = items.index(this);
+
+        switch(e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            if (currentIndex < items.length - 1) {
+              items.eq(currentIndex + 1).focus();
+            }
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            if (currentIndex > 0) {
+              items.eq(currentIndex - 1).focus();
+            } else {
+              trigger.focus();
+              closeDropdown(trigger, dropdown);
+            }
+            break;
+          case 'Escape':
+            e.preventDefault();
+            closeDropdown(trigger, dropdown);
+            trigger.focus();
+            break;
+        }
+      });
     });
 
-    // ===========================================
-    // 7. UTILITY FUNCTIONS
-    // ===========================================
+    // Close dropdowns when clicking outside
+    $(document).on('click', function(e) {
+      if (!$(e.target).closest('.nav-dropdown-wrapper').length) {
+        $('.nav-dropdown').removeClass('show').addClass('hidden');
+        $('.nav-dropdown-trigger').attr('aria-expanded', 'false');
+      }
+    });
 
-    /**
-     * Debounce function to limit scroll event firing
-     */
-    function debounce(func, wait) {
-        let timeout;
-        return function() {
-            const context = this;
-            const args = arguments;
-            clearTimeout(timeout);
-            timeout = setTimeout(function() {
-                func.apply(context, args);
-            }, wait);
-        };
+    function openDropdown(trigger, dropdown) {
+      trigger.attr('aria-expanded', 'true');
+      dropdown.addClass('show').removeClass('hidden');
     }
 
-    // ===========================================
-    // 8. SMOOTH REVEAL ON PAGE LOAD
-    // ===========================================
+    function closeDropdown(trigger, dropdown) {
+      trigger.attr('aria-expanded', 'false');
+      dropdown.removeClass('show').addClass('hidden');
+    }
+  }
 
-    // Reveal hero section immediately
-    $('#hero .fade-in').addClass('visible');
+  // ========================================
+  // Mobile Accordion Navigation
+  // ========================================
+  function initMobileAccordions() {
+    $('.mobile-nav-accordion-trigger').on('click', function() {
+      const trigger = $(this);
+      const content = $('#' + trigger.attr('aria-controls'));
+      const isExpanded = trigger.attr('aria-expanded') === 'true';
 
-    // ===========================================
-    // 9. HERO CTA BUTTON INTERACTION
-    // ===========================================
+      if (isExpanded) {
+        // Collapse
+        trigger.attr('aria-expanded', 'false');
+        content.removeClass('expanded').addClass('hidden');
+      } else {
+        // Expand
+        trigger.attr('aria-expanded', 'true');
+        content.removeClass('hidden').addClass('expanded');
+      }
+    });
+  }
 
-    $('.cta-button').on('mouseenter', function() {
-        $(this).css('transform', 'scale(1.05) translateY(-2px)');
-    }).on('mouseleave', function() {
-        $(this).css('transform', '');
+  // Initialize dropdowns and accordions
+  initDesktopDropdowns();
+  initMobileAccordions();
+
+  // ========================================
+  // Enhanced Active Navigation Highlighting
+  // ========================================
+  if ('IntersectionObserver' in window) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+
+          // Clear all active states
+          $('.nav-link, .dropdown-link, .mobile-nav-link, .nav-dropdown-trigger, .mobile-nav-accordion-trigger')
+            .removeClass('active parent-active');
+
+          // Desktop: Highlight active link and parent
+          $('.dropdown-link').each(function() {
+            const link = $(this);
+            if (link.attr('href') === '#' + id) {
+              link.addClass('active');
+              // Highlight parent category
+              link.closest('.nav-dropdown-wrapper').find('.nav-dropdown-trigger').addClass('parent-active');
+            }
+          });
+
+          // Standalone desktop links
+          $('.nav-link[href="#' + id + '"]').addClass('active');
+
+          // Mobile: Highlight active link and parent accordion
+          $('.mobile-nav-link').each(function() {
+            const link = $(this);
+            if (link.attr('href') === '#' + id) {
+              link.addClass('active');
+              // Highlight parent accordion trigger
+              link.closest('.mobile-nav-item').find('.mobile-nav-accordion-trigger').addClass('parent-active');
+              // Auto-expand parent accordion
+              const trigger = link.closest('.mobile-nav-item').find('.mobile-nav-accordion-trigger');
+              const content = $('#' + trigger.attr('aria-controls'));
+              trigger.attr('aria-expanded', 'true');
+              content.removeClass('hidden').addClass('expanded');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-80px 0px -50% 0px' // Account for sticky header
     });
 
-    // ===========================================
-    // 10. SERVICE BLOCKS HOVER EFFECT
-    // ===========================================
-
-    $('.service-block').on('mouseenter', function() {
-        $(this).css('transform', 'translateY(-5px)');
-    }).on('mouseleave', function() {
-        $(this).css('transform', '');
+    // Observe all sections with IDs
+    $('section[id]').each(function() {
+      navObserver.observe(this);
     });
+  }
 
-    // ===========================================
-    // 11. INITIAL SETUP
-    // ===========================================
+  // ========================================
+  // Prevent Animations on Prefers-Reduced-Motion
+  // ========================================
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    // Set initial active nav link
-    updateActiveNavLink();
+  if (prefersReducedMotion.matches) {
+    // Remove initial hidden state for reveal sections
+    $('.reveal-section').removeClass('opacity-0 translate-y-8').addClass('opacity-100');
+  }
 
-    // Log success message
-    console.log('🎨 GRIT Marketing Solutions - Website loaded successfully!');
-    console.log('✅ Brand color: #a1cd40');
-    console.log('✅ All interactions initialized');
+  // ========================================
+  // Close Menu on Window Resize
+  // ========================================
+  let resizeTimer;
+  $(window).on('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      // Close mobile menu
+      $('#mobile-menu').addClass('hidden');
+      $('#menu-toggle').attr('aria-expanded', 'false');
+      $('.hamburger').removeClass('active');
 
+      // Close all dropdowns
+      $('.nav-dropdown').removeClass('show').addClass('hidden');
+      $('.nav-dropdown-trigger').attr('aria-expanded', 'false');
+
+      // Collapse all accordions
+      $('.mobile-nav-accordion-trigger').attr('aria-expanded', 'false');
+      $('.mobile-accordion-content').removeClass('expanded').addClass('hidden');
+    }, 250);
+  });
+
+  // ========================================
+  // Keyboard Navigation Enhancement
+  // ========================================
+  // Ensure focus is visible when navigating with keyboard
+  $('a, button').on('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      $(this).addClass('keyboard-focus');
+    }
+  });
+
+  $('a, button').on('blur', function() {
+    $(this).removeClass('keyboard-focus');
+  });
+
+  // ========================================
+  // Log Initialization (for debugging)
+  // ========================================
+  console.log('GRIT Marketing Solutions - Initialized');
+  console.log('IntersectionObserver supported:', 'IntersectionObserver' in window);
+  console.log('Prefers reduced motion:', prefersReducedMotion.matches);
 });
-
-// ===========================================
-// 12. PAGE VISIBILITY CHANGES
-// ===========================================
-
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') {
-        // Re-check scroll position when tab becomes visible
-        $(window).trigger('scroll');
-    }
-});
-
-// ===========================================
-// 13. RESIZE HANDLER
-// ===========================================
-
-$(window).on('resize', debounce(function() {
-    // Close mobile menu on resize to desktop
-    if ($(window).width() >= 768) {
-        $('#mobile-menu').removeClass('active');
-        $('#menu-icon').text('☰');
-    }
-}, 250));
-
-/**
- * Debounce helper for resize events
- */
-function debounce(func, wait) {
-    let timeout;
-    return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            func.apply(context, args);
-        }, wait);
-    };
-}
