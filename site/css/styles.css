@@ -242,9 +242,8 @@ section {
 /* ========================================
    Smooth Scrolling
    ======================================== */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scrolling is handled by jQuery animate() in main.js */
+/* CSS scroll-behavior disabled to prevent conflicts */
 
 @media (prefers-reduced-motion: reduce) {
   html {
