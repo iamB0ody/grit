@@ -101,18 +101,16 @@ $(document).ready(function() {
   }
 
   // ========================================
-  // Close Mobile Menu on Window Resize
+  // Close Menu on Window Resize
   // ========================================
   let resizeTimer;
   $(window).on('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      // Close mobile menu if window is resized to desktop size
-      if ($(window).width() >= 768) {
-        $('#mobile-menu').addClass('hidden');
-        $('#menu-toggle').attr('aria-expanded', 'false');
-        $('.hamburger').removeClass('active');
-      }
+      // Close menu on any resize to prevent layout issues
+      $('#mobile-menu').addClass('hidden');
+      $('#menu-toggle').attr('aria-expanded', 'false');
+      $('.hamburger').removeClass('active');
     }, 250);
   });
 
