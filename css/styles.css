@@ -10,6 +10,20 @@
     box-sizing: border-box;
 }
 
+/* Noise texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
@@ -105,6 +119,48 @@ img {
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(161, 205, 64, 0.4);
+}
+
+/* Primary button with hover lift and sheen */
+.btn-primary {
+    background-color: #a1cd40;
+    color: #0b0b0b;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(161, 205, 64, 0.4);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* Card hover glow effect */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    box-shadow: 0 8px 24px rgba(161, 205, 64, 0.2);
+    transform: translateY(-4px);
 }
 
 /* ===========================================
@@ -235,6 +291,32 @@ img {
     transform: translateY(0);
 }
 
+/* Scroll reveal classes */
+.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .reveal-hidden,
+    .fade-in {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* ===========================================
    11. CONTACT SECTION
    =========================================== */
@@ -282,6 +364,12 @@ img[loading="lazy"].loaded {
 /* ===========================================
    15. ACCESSIBILITY
    =========================================== */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #a1cd40;
+    outline-offset: 2px;
+}
 
 a:focus,
 button:focus {

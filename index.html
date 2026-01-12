@@ -17,7 +17,7 @@
                     colors: {
                         'grit-green': '#a1cd40',
                         'grit-dark': '#0b0b0b',
-                        'grit-dark-light': '#151515'
+                        'grit-dark-alt': '#151515'
                     }
                 }
             }
@@ -36,14 +36,14 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
             <div class="logo">
-                <a href="#hero" class="text-2xl font-bold">
-                    <span class="text-grit-green">GRIT</span>
-                    <span class="text-white text-sm block">MARKETING SOLUTIONS</span>
+                <a href="#hero" class="flex items-center gap-2">
+                    <img src="assets/extracted-crops/logo.png" alt="GRIT Marketing Solutions" class="h-12 w-auto">
                 </a>
             </div>
 
             <div class="hidden md:flex space-x-8 nav-links">
-                <a href="#who-we-are" class="nav-link hover:text-grit-green transition">Who We Are</a>
+                <a href="#about-us" class="nav-link hover:text-grit-green transition">About</a>
+                <a href="#creative-philosophy" class="nav-link hover:text-grit-green transition">Philosophy</a>
                 <a href="#services" class="nav-link hover:text-grit-green transition">Services</a>
                 <a href="#process" class="nav-link hover:text-grit-green transition">Process</a>
                 <a href="#contact" class="nav-link hover:text-grit-green transition">Contact</a>
@@ -55,9 +55,10 @@
         </nav>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-grit-dark-light">
+        <div id="mobile-menu" class="hidden md:hidden bg-grit-dark-alt">
             <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
-                <a href="#who-we-are" class="mobile-nav-link hover:text-grit-green transition">Who We Are</a>
+                <a href="#about-us" class="mobile-nav-link hover:text-grit-green transition">About</a>
+                <a href="#creative-philosophy" class="mobile-nav-link hover:text-grit-green transition">Philosophy</a>
                 <a href="#services" class="mobile-nav-link hover:text-grit-green transition">Services</a>
                 <a href="#process" class="mobile-nav-link hover:text-grit-green transition">Process</a>
                 <a href="#contact" class="mobile-nav-link hover:text-grit-green transition">Contact</a>
@@ -67,192 +68,257 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-            <div class="hero-bg absolute inset-0 opacity-20"></div>
-            <div class="container mx-auto px-6 text-center relative z-10 fade-in">
-                <div class="logo-large mb-8">
-                    <img src="assets/img/page-01.png" alt="GRIT Marketing Solutions" class="mx-auto max-w-md w-full">
+        <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <div class="flex flex-col lg:flex-row items-center justify-center gap-12">
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/hero.png" alt="GRIT Marketing Solutions decorative graphic" loading="eager" class="w-full max-w-md mx-auto">
+                    </div>
+                    <div class="lg:w-1/2">
+                        <h1 class="text-5xl lg:text-6xl font-bold mb-8">
+                            <span class="text-grit-green">GRIT</span><br>
+                            <span class="text-white">MARKETING SOLUTIONS</span>
+                        </h1>
+                    </div>
                 </div>
-                <a href="#contact" class="cta-button inline-block bg-grit-green text-grit-dark px-8 py-4 rounded-lg text-lg font-bold hover:bg-opacity-90 transition">
-                    Let's Build Something Exceptional
-                </a>
             </div>
         </section>
 
         <!-- Who We Are Section -->
-        <section id="who-we-are" class="section-padding bg-grit-dark-light fade-in">
+        <section id="who-we-are" class="section-padding bg-grit-dark fade-in">
             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="graphic">
-                        <img src="assets/img/page-02.png" alt="Who We Are" class="w-full" loading="lazy">
-                    </div>
-                    <div class="content">
-                        <h2 class="section-heading mb-6">Who We Are</h2>
-                        <p class="text-lg leading-relaxed">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            Who We Are
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <p class="text-lg lg:text-xl leading-relaxed text-gray-300">
                             At GRIT360, we transform ideas into powerful stories.<br>
                             We combine strategic thinking with creative excellence, serving as a trusted partner for global brands in marketing solutions & event management.
                         </p>
+                    </div>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/who-we-are.png" alt="Stylized question mark outline" loading="lazy" class="w-full h-auto max-w-md mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- About Us Section -->
-        <section id="about-us" class="section-padding bg-grit-dark fade-in">
+        <section id="about-us" class="section-padding bg-grit-dark-alt fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">About Us</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="content">
-                        <p class="text-lg leading-relaxed mb-6">
-                            GRIT360- is a creative agency built for brands that refuse to blend in. We believe that every brand has a story & every touch point counts to provide unparalleled experience to our clients.<br>
-                            That's what we do best.
-                        </p>
-                        <p class="text-lg leading-relaxed mb-6">
-                            We craft ideas with personality: ideas that provoke emotion, spark curiosity, and make audiences stop, feel, and react.
-                        </p>
-                        <p class="text-lg leading-relaxed mb-6">
-                            We blend a unique artistic touch with strategic discipline acting as your branding and digital consultant.
-                        </p>
-                        <p class="text-lg leading-relaxed">
-                            The result? Campaigns, visuals, and experiences that elevate brands and connect them to people in meaningful, culturally relevant ways.
-                        </p>
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            About Us
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
+                                GRIT360- is a creative agency built for brands that refuse to blend in. We believe that every brand has a story & every touch point counts to provide unparalleled experience to our clients.<br>
+                                That's what we do best.
+                            </p>
+                            <p>
+                                We craft ideas with personality: ideas that provoke emotion, spark curiosity, and make audiences stop, feel, and react.
+                            </p>
+                            <p>
+                                We blend a unique artistic touch with strategic discipline acting as your branding and digital consultant.
+                            </p>
+                            <p>
+                                The result? Campaigns, visuals, and experiences that elevate brands and connect them to people in meaningful, culturally relevant ways.
+                            </p>
+                        </div>
                     </div>
-                    <div class="graphic">
-                        <img src="assets/img/page-03.png" alt="About Us" class="w-full" loading="lazy">
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/about-us.png" alt="Team of three people with green foliage background" loading="lazy" class="w-full h-auto max-w-lg mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Our Creative Philosophy Section -->
-        <section id="philosophy" class="section-padding bg-grit-dark-light fade-in">
+        <section id="creative-philosophy" class="section-padding bg-grit-dark fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">Our Creative Philosophy</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="graphic">
-                        <img src="assets/img/page-04.png" alt="Our Creative Philosophy" class="w-full" loading="lazy">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            Our Creative Philosophy
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
+                                Creativity is more than aesthetics.<br>
+                                For us, it is transformation, the ability of an idea to shift perception, ignite behavior, and shape culture.
+                            </p>
+                            <p>
+                                Our philosophy is simple:<br>
+                                Strategic clarity inspires bold creativity. Bold creativity fuels brand growth.
+                            </p>
+                            <p>
+                                Our formula combines artistic vision with strategic insight and deep experience, enabling us to be the trusted strategic partner our clients rely on.
+                            </p>
+                            <p>
+                                We don't chase trends; we create them.
+                            </p>
+                        </div>
                     </div>
-                    <div class="content">
-                        <p class="text-lg leading-relaxed mb-6">
-                            Creativity is more than aesthetics.<br>
-                            For us, it is transformation, the ability of an idea to shift perception, ignite behavior, and shape culture.
-                        </p>
-                        <p class="text-lg leading-relaxed mb-6">
-                            Our philosophy is simple:<br>
-                            Strategic clarity inspires bold creativity. Bold creativity fuels brand growth.
-                        </p>
-                        <p class="text-lg leading-relaxed mb-6">
-                            Our formula combines artistic vision with strategic insight and deep experience, enabling us to be the trusted strategic partner our clients rely on.
-                        </p>
-                        <p class="text-lg leading-relaxed">
-                            We don't chase trends; we create them.
-                        </p>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/creative-philosophy.png" alt="Lightbulb surrounded by creative tools: gear, pencil, rocket" loading="lazy" class="w-full h-auto max-w-lg mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Vision & Mission Section -->
-        <section id="vision-mission" class="section-padding bg-grit-dark fade-in">
+        <section id="vision-mission" class="section-padding bg-grit-dark-alt fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">Vision & Mission</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="content">
-                        <h3 class="text-2xl font-bold mb-4">Vision:</h3>
-                        <p class="text-lg leading-relaxed mb-8">
-                            To redefine creative communication by crafting bold ideas that influence culture and transform brands.
-                        </p>
-
-                        <h3 class="text-2xl font-bold mb-4">Mission:</h3>
-                        <p class="text-lg leading-relaxed">
-                            To deliver strategic, expressive, and human-centered creative solutions that help brands rise above the noise, connect deeply, and inspire action.
-                        </p>
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            Vision & Mission
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-6 text-lg leading-relaxed text-gray-300">
+                            <div>
+                                <h3 class="text-2xl font-bold text-grit-green mb-2">Vision:</h3>
+                                <p>
+                                    To redefine creative communication by crafting bold ideas that influence culture and transform brands.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-grit-green mb-2">Mission:</h3>
+                                <p>
+                                    To deliver strategic, expressive, and human-centered creative solutions that help brands rise above the noise, connect deeply, and inspire action.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="graphic">
-                        <img src="assets/img/page-05.png" alt="Vision & Mission" class="w-full" loading="lazy">
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/vision-mission.png" alt="Green arrow hitting stacked red targets" loading="lazy" class="w-full h-auto max-w-lg mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- We Belive in Agitlity Section (KEEP TYPO!) -->
-        <section id="agility" class="section-padding bg-grit-dark-light fade-in">
+        <!-- We Belive in Agitlity Section (preserving typo as per spec) -->
+        <section id="agility" class="section-padding bg-grit-dark fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">We Belive in Agitlity</h2>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="content">
-                        <p class="text-lg leading-relaxed mb-6">
-                            <strong>GRIT- 360 was built differently.</strong><br>
-                            We operate with a high level of agility, enabling seamless, constraint-free collaboration.<br>
-                            Our team can integrate at any stage- creative, design, production, or digital-providing timely, value-driven input to support your objective
-                        </p>
-                        <p class="text-lg leading-relaxed">
-                            Whether we're launching a product, building a brand, or translating scientific data into meaningful communication, we bring creativity, clarity, and craftsmanship to everything we do.
-                        </p>
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            We Belive in Agitlity
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
+                                <strong>GRIT- 360 was built differently.</strong><br>
+                                We operate with a high level of agility, enabling seamless, constraint-free collaboration.<br>
+                                Our team can integrate at any stage- creative, design, production, or digital-providing timely, value-driven input to support your objective
+                            </p>
+                            <p>
+                                Whether we're launching a product, building a brand, or translating scientific data into meaningful communication, we bring creativity, clarity, and craftsmanship to everything we do.
+                            </p>
+                        </div>
                     </div>
-                    <div class="graphic">
-                        <img src="assets/img/page-06.png" alt="We Belive in Agitlity" class="w-full" loading="lazy">
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/agility.png" alt="Impossible triangle optical illusion with business people climbing" loading="lazy" class="w-full h-auto max-w-lg mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Our Services Section -->
-        <section id="services" class="section-padding bg-grit-dark fade-in">
+        <section id="services" class="section-padding bg-grit-dark-alt fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">Our Services</h2>
-
-                <!-- Services Overview Diagram -->
-                <div class="text-center mb-16">
-                    <img src="assets/img/page-07.png" alt="Our Services Overview" class="mx-auto max-w-3xl w-full" loading="lazy">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 inline-block">
+                        Our Services
+                        <span class="block w-16 h-1 bg-grit-green mt-4 mx-auto"></span>
+                    </h2>
                 </div>
+                <div class="flex flex-col lg:flex-row items-center justify-center gap-12">
+                    <div class="lg:w-2/3">
+                        <img src="assets/extracted-crops/services-wheel.png" alt="Circular diagram showing five service categories around GRIT logo" loading="lazy" class="w-full h-auto mx-auto">
+                    </div>
+                </div>
+                <div class="mt-12 max-w-2xl mx-auto">
+                    <ul class="bullet-list text-lg space-y-3 text-gray-300">
+                        <li>Medical Marketing</li>
+                        <li>Digital Marketing Solutions</li>
+                        <li>Event Managment</li>
+                        <li>Multimedia & PR Services</li>
+                        <li>Creative & Production Services</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-                <!-- Medical Marketing -->
-                <div class="service-block mb-20 fade-in">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="graphic">
-                            <img src="assets/img/page-08.png" alt="Medical Marketing" class="w-full" loading="lazy">
-                        </div>
-                        <div class="content">
-                            <h3 class="service-heading mb-6">Medical Marketing</h3>
-                            <p class="text-lg leading-relaxed mb-6">
+        <!-- Medical Marketing Section -->
+        <section id="medical-marketing" class="section-padding bg-grit-dark fade-in">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-grit-green">
+                            Medical Marketing
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
                                 When it comes to healthcare and scientific communication, precision is everything, but that shouldn't come at the cost of creativity.<br>
                                 We specialize in transforming complex scientific content into clear, engaging, human-centered stories that resonate with both HCPs and patients.
                             </p>
-                            <p class="text-lg font-semibold mb-4">Our services include:</p>
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <ul class="bullet-list">
-                                    <li>Content structuring & planning</li>
-                                    <li>Data mining & adaptation</li>
-                                    <li>Data Refinement & Validation</li>
-                                    <li>Data validation & updates</li>
-                                    <li>Reference retrieval & citation</li>
-                                    <li>E-detailing & launch pads</li>
-                                    <li>Mass email & RTE campaigns</li>
-                                </ul>
-                                <ul class="bullet-list">
-                                    <li>Patient & HCP educational materials</li>
-                                    <li>Professional medical translation</li>
-                                    <li>Advisory board management</li>
-                                    <li>Protocol development</li>
-                                    <li>Consensus meetings</li>
-                                    <li>Scientific workshops</li>
-                                </ul>
-                            </div>
+                            <p class="font-semibold mt-6 mb-4">Our services include:</p>
+                            <ul class="bullet-list space-y-2">
+                                <li>Content structuring & planning</li>
+                                <li>Data mining & adaptation</li>
+                                <li>Data Refinement & Validation</li>
+                                <li>Data validation & updates</li>
+                                <li>Reference retrieval & citation</li>
+                                <li>E-detailing & launch pads</li>
+                                <li>Mass email & RTE campaigns</li>
+                                <li>Patient & HCP educational materials</li>
+                                <li>Professional medical translation</li>
+                                <li>Advisory board management</li>
+                                <li>Protocol development</li>
+                                <li>Consensus meetings</li>
+                                <li>Scientific workshops</li>
+                            </ul>
                         </div>
                     </div>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/medical.png" alt="Green caduceus medical symbol with wings" loading="lazy" class="w-full h-auto max-w-md mx-auto">
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Digital Marketing -->
-                <div class="service-block mb-20 fade-in">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="content order-2 md:order-1">
-                            <h3 class="service-heading mb-6">Digital Marketing</h3>
-                            <p class="text-lg leading-relaxed mb-6">
+        <!-- Digital Marketing Section -->
+        <section id="digital-marketing" class="section-padding bg-grit-dark-alt fade-in">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-grit-green">
+                            Digital Marketing
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
                                 We create digital strategies that combine storytelling, performance, and data, ensuring your brand reaches the right people, at the right moment, with the right message.
                             </p>
-                            <p class="text-lg font-semibold mb-4">Our digital services include:</p>
-                            <ul class="bullet-list">
+                            <p class="font-semibold mt-6 mb-4">Our digital services include:</p>
+                            <ul class="bullet-list space-y-2">
                                 <li>Social media strategy & management</li>
                                 <li>Content calendar creation</li>
                                 <li>Paid advertising (Meta, Google, TikTok, LinkedIn)</li>
@@ -264,28 +330,33 @@
                                 <li>Hologram displays</li>
                             </ul>
                         </div>
-                        <div class="graphic order-1 md:order-2">
-                            <img src="assets/img/page-09.png" alt="Digital Marketing" class="w-full" loading="lazy">
-                        </div>
+                    </div>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/digital.png" alt="Collage of digital marketing icons: globe, social media, devices" loading="lazy" class="w-full h-auto max-w-lg mx-auto">
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Multimedia & PR -->
-                <div class="service-block mb-20 fade-in">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="graphic">
-                            <img src="assets/img/page-10.png" alt="Multimedia & PR" class="w-full" loading="lazy">
-                        </div>
-                        <div class="content">
-                            <h3 class="service-heading mb-6">Multimedia & PR</h3>
-                            <p class="text-lg leading-relaxed mb-6">
+        <!-- Multimedia & PR Section -->
+        <section id="multimedia-pr" class="section-padding bg-grit-dark fade-in">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-grit-green">
+                            Multimedia & PR
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
                                 We produce visual content designed to move audiences, emotionally and visually.
                             </p>
-                            <p class="text-lg leading-relaxed mb-6">
+                            <p>
                                 From cinematic videos to punchy animated pieces, we craft content that captures attention and elevates your brand's narrative.
                             </p>
-                            <p class="text-lg font-semibold mb-4">We create:</p>
-                            <ul class="bullet-list">
+                            <p class="font-semibold mt-6 mb-4">We create:</p>
+                            <ul class="bullet-list space-y-2">
                                 <li>Brand films and commercial videos</li>
                                 <li>2D & 3D animated content</li>
                                 <li>Motion graphics & dynamic visual storytelling</li>
@@ -295,176 +366,197 @@
                             </ul>
                         </div>
                     </div>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/multimedia.png" alt="Social media and multimedia icons: camera, phone, chat bubbles" loading="lazy" class="w-full h-auto max-w-lg mx-auto">
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Creative & Production Services -->
-                <div class="service-block fade-in">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="content order-2 md:order-1">
-                            <h3 class="service-heading mb-6">Creative & Production Services</h3>
-                            <p class="text-lg leading-relaxed mb-6">
+        <!-- Creative & Production Services Section -->
+        <section id="creative-production" class="section-padding bg-grit-dark-alt fade-in">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-grit-green">
+                            Creative & Production Services
+                        </h2>
+                        <div class="space-y-4 text-lg leading-relaxed text-gray-300">
+                            <p>
                                 We bring ideas to life through storytelling, visuals, and bold concepts that shape brand identities and ignite audience engagement.
                             </p>
-                            <p class="text-lg font-semibold mb-4">Our creative services include:</p>
-                            <ul class="bullet-list mb-6">
+                            <p class="font-semibold mt-6 mb-4">Our creative services include:</p>
+                            <ul class="bullet-list space-y-2">
                                 <li>Concept development and campaign platform creation</li>
                                 <li>Big ideas for ATL, BTL, and digital</li>
                                 <li>Storytelling and narrative design</li>
                                 <li>Copywriting and messaging systems</li>
                                 <li>Art direction and visual conceptualization</li>
                             </ul>
-                            <p class="text-lg leading-relaxed mb-6">
+                            <p class="mt-6">
                                 Every idea is designed to be memorable, purposeful, and culturally relevant.<br>
                                 Creativity works best when people feel it, and our job is to make them feel something.
                             </p>
-                            <p class="text-lg leading-relaxed">
+                            <p class="mt-6">
                                 Our production Capabilities enable us to support you across the Middle East, Europe, and the United States.
                             </p>
                         </div>
-                        <div class="graphic order-1 md:order-2">
-                            <img src="assets/img/page-11.png" alt="Creative & Production Services" class="w-full" loading="lazy">
-                        </div>
+                    </div>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/production.png" alt="Green lightbulb with creative spark design" loading="lazy" class="w-full h-auto max-w-md mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Our Process Section -->
-        <section id="process" class="section-padding bg-grit-dark-light fade-in">
+        <section id="process" class="section-padding bg-grit-dark fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">Our Process</h2>
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            Our Process
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-6 text-lg leading-relaxed text-gray-300">
+                            <p class="font-bold text-xl">
+                                Every powerful project begins with a clear process.
+                            </p>
 
-                <p class="text-xl text-center mb-12">Every powerful project begins with a clear process.</p>
+                            <div class="process-step">
+                                <h3 class="text-xl font-bold text-grit-green mb-2">1. Discovery & Insight</h3>
+                                <p>We dive deep into your brand, audience, and market to identify real challenges and opportunities.</p>
+                            </div>
 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="content">
-                        <div class="process-step mb-8">
-                            <h3 class="text-2xl font-bold mb-3">1. Discovery & Insight</h3>
-                            <p class="text-lg leading-relaxed">
-                                We dive deep into your brand, audience, and market to identify real challenges and opportunities.
+                            <div class="process-step">
+                                <h3 class="text-xl font-bold text-grit-green mb-2">2. Strategy & Positioning</h3>
+                                <p>We define the narrative, messaging, and direction that will drive the creative work.</p>
+                            </div>
+
+                            <div class="process-step">
+                                <h3 class="text-xl font-bold text-grit-green mb-2">3. Creative Development</h3>
+                                <p>Ideas come to life through concepts, visuals, and storytelling.</p>
+                            </div>
+
+                            <div class="process-step">
+                                <h3 class="text-xl font-bold text-grit-green mb-2">4. Production & Execution</h3>
+                                <p>From design to video to digital content, we build high-quality deliverables ready to launch.</p>
+                            </div>
+
+                            <div class="process-step">
+                                <h3 class="text-xl font-bold text-grit-green mb-2">5. Optimization & Growth</h3>
+                                <p>We track impact, learn, refine, and scale — ensuring long-term brand success.</p>
+                            </div>
+
+                            <p class="mt-6 font-semibold">
+                                Our process is collaborative, transparent, and built for results.
                             </p>
                         </div>
-
-                        <div class="process-step mb-8">
-                            <h3 class="text-2xl font-bold mb-3">2. Strategy & Positioning</h3>
-                            <p class="text-lg leading-relaxed">
-                                We define the narrative, messaging, and direction that will drive the creative work.
-                            </p>
-                        </div>
-
-                        <div class="process-step mb-8">
-                            <h3 class="text-2xl font-bold mb-3">3. Creative Development</h3>
-                            <p class="text-lg leading-relaxed">
-                                Ideas come to life through concepts, visuals, and storytelling.
-                            </p>
-                        </div>
-
-                        <div class="process-step mb-8">
-                            <h3 class="text-2xl font-bold mb-3">4. Production & Execution</h3>
-                            <p class="text-lg leading-relaxed">
-                                From design to video to digital content, we build high-quality deliverables ready to launch.
-                            </p>
-                        </div>
-
-                        <div class="process-step mb-8">
-                            <h3 class="text-2xl font-bold mb-3">5. Optimization & Growth</h3>
-                            <p class="text-lg leading-relaxed">
-                                We track impact, learn, refine, and scale — ensuring long-term brand success.
-                            </p>
-                        </div>
-
-                        <p class="text-lg leading-relaxed font-semibold">
-                            Our process is collaborative, transparent, and built for results.
-                        </p>
                     </div>
-                    <div class="graphic">
-                        <img src="assets/img/page-12.png" alt="Our Process" class="w-full" loading="lazy">
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/process.png" alt="Vertical timeline with five process steps and icons" loading="lazy" class="w-full h-auto max-w-md mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Why Clients Choose Us Section -->
-        <section id="why-us" class="section-padding bg-grit-dark fade-in">
+        <section id="why-choose-us" class="section-padding bg-grit-dark-alt fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">Why Clients Choose Us</h2>
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            Why Clients Choose Us
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-6 text-lg leading-relaxed text-gray-300">
+                            <p class="font-bold">Brands choose GRIT- 360 because we deliver work that is:</p>
 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="graphic">
-                        <img src="assets/img/page-13.png" alt="Why Clients Choose Us" class="w-full" loading="lazy">
-                    </div>
-                    <div class="content">
-                        <p class="text-lg leading-relaxed mb-6">
-                            Brands choose GRIT- 360 because we deliver work that is:
-                        </p>
+                            <div class="why-list space-y-4">
+                                <p><strong>Bold</strong> — creatively expressive</p>
+                                <p><strong>Strategic</strong> — grounded in insight</p>
+                                <p><strong>Clear</strong> — visually and narratively distinct</p>
+                                <p><strong>Effective</strong> — built to perform</p>
+                            </div>
 
-                        <div class="why-list mb-8">
-                            <p class="text-lg leading-relaxed mb-3">
-                                Bold — creatively expressive
+                            <p class="mt-6">
+                                We understand industries, but more importantly, we understand people.<br>
+                                We don't just produce content , we create meaning, emotion, and momentum.
                             </p>
-                            <p class="text-lg leading-relaxed mb-3">
-                                Strategic — grounded in insight
-                            </p>
-                            <p class="text-lg leading-relaxed mb-3">
-                                Clear — visually and narratively distinct
-                            </p>
-                            <p class="text-lg leading-relaxed mb-6">
-                                Effective — built to perform
+
+                            <p class="mt-6 font-semibold">
+                                Most of all, we act as partners, not vendors.
                             </p>
                         </div>
-
-                        <p class="text-lg leading-relaxed mb-4">
-                            We understand industries, but more importantly, we understand people.<br>
-                            We don't just produce content , we create meaning, emotion, and momentum.
-                        </p>
-
-                        <p class="text-lg leading-relaxed font-semibold">
-                            Most of all, we act as partners, not vendors.
-                        </p>
+                    </div>
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/why-choose-us.png" alt="Handshake icon inside green circular badge" loading="lazy" class="w-full h-auto max-w-md mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Information Section -->
-        <section id="contact" class="section-padding bg-grit-dark-light fade-in">
+        <section id="contact" class="section-padding bg-grit-dark fade-in">
             <div class="container mx-auto px-6">
-                <h2 class="section-heading text-center mb-12">Contact Information</h2>
+                <div class="flex flex-col lg:flex-row-reverse items-center gap-12">
+                    <!-- Text Block -->
+                    <div class="lg:w-1/2">
+                        <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                            Contact Information
+                            <span class="block w-16 h-1 bg-grit-green mt-4"></span>
+                        </h2>
+                        <div class="space-y-6 text-lg leading-relaxed text-gray-300">
+                            <p class="text-2xl font-bold text-grit-green">
+                                Let's Build Something Exceptional
+                            </p>
 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="content">
-                        <p class="text-3xl font-bold mb-8 text-grit-green">Let's Build Something Exceptional</p>
+                            <div class="contact-details space-y-4">
+                                <p>
+                                    <a href="mailto:info@grit360-.com" class="hover:text-grit-green transition">
+                                        info@grit360-.com
+                                    </a>
+                                </p>
 
-                        <div class="contact-details space-y-4">
-                            <p class="text-xl">
-                                <a href="mailto:info@grit360-.com" class="hover:text-grit-green transition">info@grit360-.com</a>
-                            </p>
-                            <p class="text-xl">
-                                <a href="http://www.grit360-.com" target="_blank" class="hover:text-grit-green transition">www.grit360-.com</a>
-                            </p>
-                            <p class="text-lg leading-relaxed mt-6">
-                                Meydan Grandstand, 6th Floor, Meydan Road,<br>
-                                Nad Al Sheba, Dubai, U.A.E.
-                            </p>
+                                <p>
+                                    <a href="http://www.grit360-.com" target="_blank" rel="noopener noreferrer" class="hover:text-grit-green transition">
+                                        www.grit360-.com
+                                    </a>
+                                </p>
+
+                                <p>
+                                    Meydan Grandstand, 6th Floor, Meydan Road,<br>
+                                    Nad Al Sheba, Dubai, U.A.E.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="graphic">
-                        <img src="assets/img/page-14.png" alt="Contact Information" class="w-full" loading="lazy">
+                    <!-- Image Block -->
+                    <div class="lg:w-1/2">
+                        <img src="assets/extracted-crops/contact.png" alt="Vintage rotary telephone in green" loading="lazy" class="w-full h-auto max-w-md mx-auto">
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Thank You Footer Section -->
+        <section id="thank-you" class="section-padding bg-grit-dark-alt fade-in">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-5xl lg:text-6xl font-bold text-grit-green">
+                    Thank You
+                </h2>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-grit-dark py-12">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Thank You</h2>
-            <p class="text-gray-400">&copy; 2026 GRIT Marketing Solutions. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Custom JS -->
+    <!-- Main JS -->
     <script src="js/main.js"></script>
 </body>
 </html>

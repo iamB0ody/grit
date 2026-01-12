@@ -36,26 +36,30 @@ xdg-open index.html # Linux
 ```
 grit/
 ├── assets/
-│   └── img/              # Extracted PDF images (16 pages)
-│       ├── page-01.png   # Hero/Cover (GRIT logo)
-│       ├── page-02.png   # Who We Are (question mark)
-│       ├── page-03.png   # About Us (team illustration)
-│       ├── page-04.png   # Philosophy (lightbulb)
-│       ├── page-05.png   # Vision & Mission (target)
-│       ├── page-06.png   # Agility (stairs)
-│       ├── page-07.png   # Services Overview
-│       ├── page-08.png   # Medical Marketing
-│       ├── page-09.png   # Digital Marketing
-│       ├── page-10.png   # Multimedia & PR
-│       ├── page-11.png   # Creative Services
-│       ├── page-12.png   # Our Process
-│       ├── page-13.png   # Why Choose Us
-│       ├── page-14.png   # Contact Info
-│       └── page-16.png   # Thank You
+│   ├── extracted-crops/  # Cropped illustration images from PDF
+│   │   ├── logo.png              # GRIT logo
+│   │   ├── hero.png              # Hero decorative graphic
+│   │   ├── who-we-are.png        # Question mark illustration
+│   │   ├── about-us.png          # Team illustration
+│   │   ├── creative-philosophy.png  # Lightbulb with tools
+│   │   ├── vision-mission.png    # Arrow hitting targets
+│   │   ├── agility.png           # Impossible triangle
+│   │   ├── services-wheel.png    # Services diagram
+│   │   ├── medical.png           # Caduceus symbol
+│   │   ├── digital.png           # Digital marketing icons
+│   │   ├── multimedia.png        # Multimedia icons
+│   │   ├── production.png        # Production lightbulb
+│   │   ├── process.png           # Process timeline
+│   │   ├── why-choose-us.png     # Handshake icon
+│   │   └── contact.png           # Vintage telephone
+│   └── extracted-pages/  # Full PDF page renders (temporary)
+├── content/
+│   └── source-copy.txt   # Verbatim text from PDF
 ├── css/
 │   └── styles.css        # Custom styles
 ├── js/
 │   └── main.js           # jQuery interactions
+├── specs/                # Feature specifications
 ├── .gitignore            # Git ignore file
 ├── index.html            # Main landing page
 └── README.md             # This file
@@ -98,23 +102,25 @@ grit/
 
 ## 📋 Asset Mapping
 
-| PDF Page | Image File | Section | Description |
-|----------|-----------|---------|-------------|
-| 1 | page-01.png | Hero | GRIT logo with circular design |
-| 2 | page-02.png | Who We Are | Large question mark graphic |
-| 3 | page-03.png | About Us | Team illustration |
-| 4 | page-04.png | Philosophy | Lightbulb with gears |
-| 5 | page-05.png | Vision & Mission | Target/dart illustration |
-| 6 | page-06.png | Agility | Stairs with flag |
-| 7 | page-07.png | Services | Services overview diagram |
-| 8 | page-08.png | Medical Marketing | Medical caduceus symbol |
-| 9 | page-09.png | Digital Marketing | Social media icons |
-| 10 | page-10.png | Multimedia & PR | Multimedia icons |
-| 11 | page-11.png | Creative Services | Lightbulb illustration |
-| 12 | page-12.png | Our Process | Process steps diagram |
-| 13 | page-13.png | Why Choose Us | Handshake illustration |
-| 14 | page-14.png | Contact | Phone illustration |
-| 16 | page-16.png | Footer | Thank You |
+All images are cropped illustrations extracted from the PDF at 220 DPI.
+
+| PDF Page | Cropped Image | Section | Description |
+|----------|---------------|---------|-------------|
+| 1 | logo.png | Header/Hero | GRIT Marketing Solutions logo |
+| 1 | hero.png | Hero | Decorative concentric circles graphic |
+| 2 | who-we-are.png | Who We Are | Stylized question mark outline |
+| 3 | about-us.png | About Us | Team of three with foliage background |
+| 4 | creative-philosophy.png | Philosophy | Lightbulb with creative tools |
+| 5 | vision-mission.png | Vision & Mission | Green arrow hitting red targets |
+| 6 | agility.png | Agility | Impossible triangle with people |
+| 7 | services-wheel.png | Services | Circular service diagram |
+| 8 | medical.png | Medical Marketing | Green caduceus medical symbol |
+| 9 | digital.png | Digital Marketing | Digital marketing icons collage |
+| 10 | multimedia.png | Multimedia & PR | Social media and multimedia icons |
+| 11 | production.png | Creative Services | Green lightbulb with spark |
+| 12 | process.png | Our Process | Vertical timeline with 5 steps |
+| 13 | why-choose-us.png | Why Choose Us | Handshake in green circular badge |
+| 14 | contact.png | Contact | Vintage rotary telephone in green |
 
 ## 🎨 Brand Guidelines
 
@@ -157,7 +163,9 @@ Replace all instances of `#a1cd40` with your color
 4. Add smooth scroll handling in `main.js`
 
 ### Modifying Images
-Replace image files in `assets/img/` directory. Update references in `index.html` if filenames change.
+Replace image files in `assets/extracted-crops/` directory. Update references in `index.html` if filenames change.
+
+Note: All images are cropped illustrations extracted from the PDF, not full page images.
 
 ## 📱 Responsive Breakpoints
 
