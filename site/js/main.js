@@ -66,17 +66,171 @@ $(document).ready(function() {
   }
 
   // ========================================
-  // Active Navigation Highlighting
+  // Desktop Dropdown Navigation
+  // ========================================
+  function initDesktopDropdowns() {
+    const dropdownWrappers = $('.nav-dropdown-wrapper');
+
+    dropdownWrappers.each(function() {
+      const wrapper = $(this);
+      const trigger = wrapper.find('.nav-dropdown-trigger');
+      const dropdown = wrapper.find('.nav-dropdown');
+
+      // Hover behavior
+      wrapper.on('mouseenter', function() {
+        openDropdown(trigger, dropdown);
+      });
+
+      wrapper.on('mouseleave', function() {
+        closeDropdown(trigger, dropdown);
+      });
+
+      // Click toggle for touch devices
+      trigger.on('click', function(e) {
+        e.preventDefault();
+        if (dropdown.hasClass('show')) {
+          closeDropdown(trigger, dropdown);
+        } else {
+          $('.nav-dropdown').removeClass('show').addClass('hidden');
+          $('.nav-dropdown-trigger').attr('aria-expanded', 'false');
+          openDropdown(trigger, dropdown);
+        }
+      });
+
+      // Keyboard navigation
+      trigger.on('keydown', function(e) {
+        switch(e.key) {
+          case 'Enter':
+          case ' ':
+          case 'ArrowDown':
+            e.preventDefault();
+            if (!dropdown.hasClass('show')) {
+              openDropdown(trigger, dropdown);
+            }
+            dropdown.find('.dropdown-link').first().focus();
+            break;
+          case 'Escape':
+            e.preventDefault();
+            closeDropdown(trigger, dropdown);
+            trigger.focus();
+            break;
+        }
+      });
+
+      // Dropdown item keyboard navigation
+      dropdown.find('.dropdown-link').on('keydown', function(e) {
+        const items = dropdown.find('.dropdown-link');
+        const currentIndex = items.index(this);
+
+        switch(e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            if (currentIndex < items.length - 1) {
+              items.eq(currentIndex + 1).focus();
+            }
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            if (currentIndex > 0) {
+              items.eq(currentIndex - 1).focus();
+            } else {
+              trigger.focus();
+              closeDropdown(trigger, dropdown);
+            }
+            break;
+          case 'Escape':
+            e.preventDefault();
+            closeDropdown(trigger, dropdown);
+            trigger.focus();
+            break;
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    $(document).on('click', function(e) {
+      if (!$(e.target).closest('.nav-dropdown-wrapper').length) {
+        $('.nav-dropdown').removeClass('show').addClass('hidden');
+        $('.nav-dropdown-trigger').attr('aria-expanded', 'false');
+      }
+    });
+
+    function openDropdown(trigger, dropdown) {
+      trigger.attr('aria-expanded', 'true');
+      dropdown.addClass('show').removeClass('hidden');
+    }
+
+    function closeDropdown(trigger, dropdown) {
+      trigger.attr('aria-expanded', 'false');
+      dropdown.removeClass('show').addClass('hidden');
+    }
+  }
+
+  // ========================================
+  // Mobile Accordion Navigation
+  // ========================================
+  function initMobileAccordions() {
+    $('.mobile-nav-accordion-trigger').on('click', function() {
+      const trigger = $(this);
+      const content = $('#' + trigger.attr('aria-controls'));
+      const isExpanded = trigger.attr('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Collapse
+        trigger.attr('aria-expanded', 'false');
+        content.removeClass('expanded').addClass('hidden');
+      } else {
+        // Expand
+        trigger.attr('aria-expanded', 'true');
+        content.removeClass('hidden').addClass('expanded');
+      }
+    });
+  }
+
+  // Initialize dropdowns and accordions
+  initDesktopDropdowns();
+  initMobileAccordions();
+
+  // ========================================
+  // Enhanced Active Navigation Highlighting
   // ========================================
   if ('IntersectionObserver' in window) {
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
-          // Remove active class from all nav links
-          $('nav a').removeClass('active');
-          // Add active class to corresponding nav link
-          $(`nav a[href="#${id}"]`).addClass('active');
+
+          // Clear all active states
+          $('.nav-link, .dropdown-link, .mobile-nav-link, .nav-dropdown-trigger, .mobile-nav-accordion-trigger')
+            .removeClass('active parent-active');
+
+          // Desktop: Highlight active link and parent
+          $('.dropdown-link').each(function() {
+            const link = $(this);
+            if (link.attr('href') === '#' + id) {
+              link.addClass('active');
+              // Highlight parent category
+              link.closest('.nav-dropdown-wrapper').find('.nav-dropdown-trigger').addClass('parent-active');
+            }
+          });
+
+          // Standalone desktop links
+          $('.nav-link[href="#' + id + '"]').addClass('active');
+
+          // Mobile: Highlight active link and parent accordion
+          $('.mobile-nav-link').each(function() {
+            const link = $(this);
+            if (link.attr('href') === '#' + id) {
+              link.addClass('active');
+              // Highlight parent accordion trigger
+              link.closest('.mobile-nav-item').find('.mobile-nav-accordion-trigger').addClass('parent-active');
+              // Auto-expand parent accordion
+              const trigger = link.closest('.mobile-nav-item').find('.mobile-nav-accordion-trigger');
+              const content = $('#' + trigger.attr('aria-controls'));
+              trigger.attr('aria-expanded', 'true');
+              content.removeClass('hidden').addClass('expanded');
+            }
+          });
         }
       });
     }, {
@@ -107,10 +261,18 @@ $(document).ready(function() {
   $(window).on('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      // Close menu on any resize to prevent layout issues
+      // Close mobile menu
       $('#mobile-menu').addClass('hidden');
       $('#menu-toggle').attr('aria-expanded', 'false');
       $('.hamburger').removeClass('active');
+
+      // Close all dropdowns
+      $('.nav-dropdown').removeClass('show').addClass('hidden');
+      $('.nav-dropdown-trigger').attr('aria-expanded', 'false');
+
+      // Collapse all accordions
+      $('.mobile-nav-accordion-trigger').attr('aria-expanded', 'false');
+      $('.mobile-accordion-content').removeClass('expanded').addClass('hidden');
     }, 250);
   });
 
