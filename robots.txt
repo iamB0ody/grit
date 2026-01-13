@@ -1,0 +1,6 @@
+# robots.txt for GRIT Marketing Solutions
+
+User-agent: *
+Allow: /
+
+Sitemap: https://gritmarketing.sa/sitemap.xml
