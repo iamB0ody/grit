@@ -6,6 +6,42 @@
     <meta name="description" content="GRIT Marketing Solutions - Transform ideas into powerful stories with creative excellence and strategic thinking" />
     <title>GRIT Marketing Solutions</title>
 
+    <!-- Primary SEO Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="GRIT Marketing Solutions" />
+    <link rel="canonical" href="https://gritmarketing.sa/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gritmarketing.sa/" />
+    <meta property="og:title" content="GRIT Marketing Solutions" />
+    <meta property="og:description" content="GRIT Marketing Solutions - Transform ideas into powerful stories with creative excellence and strategic thinking" />
+    <meta property="og:image" content="https://gritmarketing.sa/assets/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="GRIT Marketing Solutions" />
+    <meta property="og:site_name" content="GRIT Marketing Solutions" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://gritmarketing.sa/" />
+    <meta name="twitter:title" content="GRIT Marketing Solutions" />
+    <meta name="twitter:description" content="GRIT Marketing Solutions - Transform ideas into powerful stories with creative excellence and strategic thinking" />
+    <meta name="twitter:image" content="https://gritmarketing.sa/assets/og-image.jpg" />
+    <meta name="twitter:image:alt" content="GRIT Marketing Solutions" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#a1cd40" />
+    <meta name="msapplication-TileColor" content="#0a0a0a" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -30,6 +66,92 @@
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://gritmarketing.sa/#organization",
+          "name": "GRIT Marketing Solutions",
+          "description": "Full-service marketing agency specializing in medical marketing, digital marketing, multimedia production, and creative solutions.",
+          "url": "https://gritmarketing.sa/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gritmarketing.sa/assets/logo.png"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "SA"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Marketing Services",
+            "itemListElement": [
+              {
+                "@type": "Service",
+                "name": "Medical Marketing",
+                "description": "Specialized marketing solutions for healthcare and medical industries",
+                "provider": {
+                  "@id": "https://gritmarketing.sa/#organization"
+                }
+              },
+              {
+                "@type": "Service",
+                "name": "Digital Marketing",
+                "description": "Comprehensive digital marketing strategies including SEO, social media, and online advertising",
+                "provider": {
+                  "@id": "https://gritmarketing.sa/#organization"
+                }
+              },
+              {
+                "@type": "Service",
+                "name": "Multimedia & PR",
+                "description": "Public relations and multimedia content creation",
+                "provider": {
+                  "@id": "https://gritmarketing.sa/#organization"
+                }
+              },
+              {
+                "@type": "Service",
+                "name": "Creative Production",
+                "description": "Creative design and production services for brands",
+                "provider": {
+                  "@id": "https://gritmarketing.sa/#organization"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gritmarketing.sa/#website",
+          "url": "https://gritmarketing.sa/",
+          "name": "GRIT Marketing Solutions",
+          "publisher": {
+            "@id": "https://gritmarketing.sa/#organization"
+          },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://gritmarketing.sa/#webpage",
+          "url": "https://gritmarketing.sa/",
+          "name": "GRIT Marketing Solutions",
+          "isPartOf": {
+            "@id": "https://gritmarketing.sa/#website"
+          },
+          "about": {
+            "@id": "https://gritmarketing.sa/#organization"
+          },
+          "description": "GRIT Marketing Solutions - Transform ideas into powerful stories with creative excellence and strategic thinking",
+          "inLanguage": "en"
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-dark text-white font-sans">
     <!-- Animated Gradient Orbs (Background Decoration) -->
