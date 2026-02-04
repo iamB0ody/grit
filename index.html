@@ -270,10 +270,19 @@
     <main>
       <!-- Section 1: Hero -->
       <section id="hero" class="min-h-screen flex items-center justify-center bg-dark-lighter pt-20">
-        <div class="container mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-primary">GRIT MARKETING SOLUTIONS</h1>
-          <p class="text-xl md:text-2xl text-gray-300 mb-12">Transform ideas into powerful stories</p>
-          <div class="max-w-3xl mx-auto">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+          <!-- Hero logo above image -->
+          <div class="flex justify-center mb-4">
+            <img src="assets/illustrations/hero-logo.svg" alt="GRIT logo" class="w-20 md:w-24 lg:w-28 h-auto" loading="eager" />
+          </div>
+
+          <!-- Hero content with text overlays -->
+          <div class="relative max-w-3xl mx-auto">
+            <!-- Left text overlay -->
+            <h2 class="absolute left-4 md:left-8 top-8 md:top-12 text-2xl md:text-3xl lg:text-4xl font-bold text-primary z-10">Driven by Strategy</h2>
+            <!-- Right text overlay -->
+            <h2 class="absolute right-4 md:right-8 top-8 md:top-12 text-2xl md:text-3xl lg:text-4xl font-bold z-10" style="color: #3f3d56">Powered by grit</h2>
+            <!-- Hero illustration -->
             <img src="assets/illustrations/hero.svg" alt="Marketing growth and strategy illustration" class="w-full h-auto" loading="eager" />
           </div>
         </div>
