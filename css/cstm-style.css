@@ -1,0 +1,10 @@
+
+
+@font-face {
+  font-family: akzidenz; 
+  src:url(../fonts/akzidenz.ttf)
+}
+
+.cstm_txt1{
+  font-family:akzidenz !important;
+}
