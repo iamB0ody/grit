@@ -8,3 +8,12 @@
 .cstm_txt1{
   font-family:akzidenz !important;
 }
+
+.hero-right-text {
+  position: absolute;
+  right: 34px !important;
+  top: 54% !important;   
+  transform: translateY(-50%) !important;
+  font-weight: bold !important;
+  color: #3f3d56 !important;
+}
