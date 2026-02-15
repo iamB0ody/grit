@@ -43,26 +43,21 @@ $(document).ready(function() {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          $(entry.target)
-            .removeClass('opacity-0 translate-y-8')
-            .addClass('opacity-100 translate-y-0');
-          // Unobserve after revealing (one-time animation)
-          revealObserver.unobserve(entry.target);
+          entry.target.classList.add('revealed');
+        } else {
+          entry.target.classList.remove('revealed');
         }
       });
     }, {
-      threshold: 0.1,
+      threshold: 0.15,
       rootMargin: '0px 0px -50px 0px'
     });
 
-    // Add initial hidden state and observe all reveal sections
     $('.reveal-section').each(function() {
-      $(this).addClass('opacity-0 translate-y-8');
       revealObserver.observe(this);
     });
   } else {
-    // Fallback: Show all sections immediately if IntersectionObserver not supported
-    $('.reveal-section').removeClass('opacity-0 translate-y-8');
+    $('.reveal-section').addClass('revealed');
   }
 
   // ========================================
@@ -250,9 +245,26 @@ $(document).ready(function() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (prefersReducedMotion.matches) {
-    // Remove initial hidden state for reveal sections
-    $('.reveal-section').removeClass('opacity-0 translate-y-8').addClass('opacity-100');
+    $('.reveal-section').addClass('revealed');
   }
+
+  // ========================================
+  // Header Scroll Effect
+  // ========================================
+  let lastScrollTop = 0;
+  const header = $('.glass-header');
+
+  $(window).on('scroll', function() {
+    const scrollTop = $(this).scrollTop();
+    
+    if (scrollTop > 50) {
+      header.addClass('scrolled');
+    } else {
+      header.removeClass('scrolled');
+    }
+
+    lastScrollTop = scrollTop;
+  });
 
   // ========================================
   // Close Menu on Window Resize
