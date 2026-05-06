@@ -9,6 +9,7 @@
   font-family:akzidenz !important;
 }
 
+
 .hero-fullscreen {
   position: relative;
   width: 100vw;
@@ -57,7 +58,17 @@
   z-index: 10;
 }
 
+.hero-mobile-logo {
+  display: none;
+}
+
 @media (max-width: 767px) {
+  .hero-mobile-logo {
+    display: block;
+    width: 160px;
+    margin: 0 auto 1rem;
+  }
+
   .hero-fullscreen {
     display: flex;
     flex-direction: column;
