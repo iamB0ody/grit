@@ -23,3 +23,6 @@ Thumbs.db
 # Claude Code configuration
 .claude/
 .specify/
+
+# Remote site backup
+_remote_backup/

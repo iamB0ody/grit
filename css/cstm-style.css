@@ -65,18 +65,19 @@
 @media (max-width: 767px) {
   .hero-mobile-logo {
     display: block;
-    width: 160px;
-    margin: 0 auto 1rem;
+    width: 90px;
+    height: auto;
+    margin: 3rem auto;
   }
 
   .hero-fullscreen {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: auto;
     min-height: 100vh;
-    padding-top: 56px;
+    padding: 72px 0 1rem;
   }
 
   .hero-image-container {
@@ -88,7 +89,7 @@
   .hero-mobile-quote {
     display: block;
     position: static;
-    margin: 0 auto 0.75rem;
+    margin: 0 auto 0.5rem;
     padding: 0 1rem;
     max-width: 900px;
     text-align: center;
